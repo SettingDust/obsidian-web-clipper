@@ -1,0 +1,22 @@
+{
+  "extensionName": {
+    "message": "Obsidian Web Clipper",
+    "description": "Name of the extension."
+  },
+  "extensionDescription": {
+    "message": "Export the page content to Obsidian as Markdown",
+    "description": "Description of the extension."
+  },
+  "exportCommandDescription": {
+    "message": "Export to Obsidian",
+    "description": "Description of the export command."
+  },
+  "optionVault": {
+    "message": "Vault",
+    "description": "The label of vault option"
+  },
+  "optionPath": {
+    "message": "Path",
+    "description": "The label of path option"
+  }
+}

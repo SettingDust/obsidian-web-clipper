@@ -1,0 +1,22 @@
+{
+  "extensionName": {
+    "message": "Obsidian 网页剪藏",
+    "description": "Name of the extension."
+  },
+  "extensionDescription": {
+    "message": "剪藏页面内容为 Markdown 到 Obsidian",
+    "description": "Description of the extension."
+  },
+  "exportCommandDescription": {
+    "message": "剪藏到 Obsidian",
+    "description": "Description of the export command."
+  },
+  "optionVault": {
+    "message": "知识库",
+    "description": "The label of vault option"
+  },
+  "optionPath": {
+    "message": "路径",
+    "description": "The label of path option"
+  }
+}

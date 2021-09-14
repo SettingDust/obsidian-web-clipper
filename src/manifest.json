@@ -1,0 +1,38 @@
+{
+  "$schema": "https://raw.githubusercontent.com/PrsPrsBK/ffext-manifest-schema/master/ffext.json",
+  "manifest_version": 2,
+  "name": "__MSG_extensionName__",
+  "version": "0.1.0",
+  "description": "__MSG_extensionDescription__",
+  "permissions": [
+    "tabs",
+    "storage"
+  ],
+  "commands": {
+    "export": {
+      "description": "__MSG_exportCommandDescription__",
+      "suggested_key": {
+        "default": "Alt+O"
+      }
+    }
+  },
+  "background": {
+    "page": "index.html?#/background",
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "content-script/turndown.js",
+        "content-script/mercury.web.js",
+        "content-script/content-script.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
+  "options_ui": {
+    "page": "index.html?#/options"
+  }
+}
