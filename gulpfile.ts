@@ -19,7 +19,7 @@ gulp.task('build:angular', (cb) =>
 )
 
 gulp.task('build:compress', () => {
-    const output = fs.createWriteStream('dist/dist.zip');
+    const output = fs.createWriteStream('dist.zip');
     const archive = archiver('zip').directory('dist', false)
     archive.pipe(output)
     return archive.finalize()
