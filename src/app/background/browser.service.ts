@@ -21,8 +21,7 @@ export class BrowserService {
 export interface ExportMessage {
   action: 'export'
   data: {
-    title: string,
-    content: string,
-    lead_image_url: string
+    html: string,
+    url:string
   }
 }

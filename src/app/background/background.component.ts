@@ -5,6 +5,8 @@ import {BrowserService, ExportMessage} from "./browser.service";
 import {ObsidianService} from "./obsidian.service";
 import {OperatorFunction, Subject} from "rxjs";
 import {filter, map, switchMap} from "rxjs/operators";
+import {MercuryService} from "./mercury.service";
+import {MarkdownService} from "./markdown.service";
 
 type Tab = browser.tabs.Tab;
 
@@ -14,13 +16,21 @@ type Tab = browser.tabs.Tab;
   styles: []
 })
 export class BackgroundComponent {
-  constructor(browserService: BrowserService, obsidianService: ObsidianService) {
+  constructor(browserService: BrowserService, obsidianService: ObsidianService, mercuryService: MercuryService, markdownService: MarkdownService) {
     const exportMessage$ = new Subject<ExportMessage>()
     exportMessage$.pipe(
-      switchMap(async (message) =>
-        ({...await browser.storage.local.get(['vault', 'path']), ...message})
-      ) as OperatorFunction<ExportMessage, ExportMessage & { vault: string, path: string }>,
-      switchMap(({data, vault, path}) => obsidianService.new(vault, `${path}/${data.title}`, data.content)),
+      switchMap(({data}) => mercuryService.parse(data.url, {html: data.html})),
+      switchMap((result) => browser.storage.local.get(['vault', 'path']).then(res => ({config: res, ...result}))),
+      switchMap((result) => markdownService.convert(result.content ?? '').pipe(map(markdown => ({
+        ...result,
+        content: markdown
+      })))),
+      switchMap(({
+                   title,
+                   content,
+                   config
+                 }) => obsidianService.new(config.vault, `${config.path}/${title}`, content ?? '')
+      ),
       filter(({id}) => !!id),
       map(({id}) => id) as OperatorFunction<Tab, number>,
       switchMap(id => browser.tabs.remove(id))
@@ -29,7 +39,7 @@ export class BackgroundComponent {
     browserService.command("export").pipe(
       switchMap(() => browser.tabs.query({active: true})),
       map((tabs) => tabs[0].id),
-      filter((id) => id !== undefined) as OperatorFunction<number | undefined, number>,
+      filter((id) => !!id) as OperatorFunction<number | undefined, number>,
       switchMap((id) => browser.tabs.sendMessage(id, {action: 'export'}) as Promise<ExportMessage>)
     ).subscribe(res => exportMessage$.next(res))
   }
