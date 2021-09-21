@@ -23,8 +23,6 @@
   "content_scripts": [
     {
       "js": [
-        "content-script/turndown.js",
-        "content-script/mercury.web.js",
         "content-script/content-script.js"
       ],
       "matches": [
@@ -34,5 +32,6 @@
   ],
   "options_ui": {
     "page": "index.html?#/options"
-  }
+  },
+  "default_locale": "en"
 }

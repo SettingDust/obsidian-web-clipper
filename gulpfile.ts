@@ -10,10 +10,11 @@ gulp.task('clean', () => {
   ])
 })
 
-gulp.task('build:angular', () =>
+gulp.task('build:angular', (cb) =>
   exec("ng build", (error, stdout, stderr) => {
     console.info(stdout);
     console.error(stderr);
+    cb(error)
   })
 )
 
