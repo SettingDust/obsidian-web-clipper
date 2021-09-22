@@ -5,8 +5,9 @@ import {BrowserService, ExportMessage} from "./browser.service";
 import {ObsidianService} from "./obsidian.service";
 import {OperatorFunction, Subject} from "rxjs";
 import {filter, map, switchMap} from "rxjs/operators";
-import {MercuryService} from "./mercury.service";
 import {MarkdownService} from "./markdown.service";
+import {ArticleParserService} from './article-parser.service';
+import filenamify from "filenamify";
 
 type Tab = browser.tabs.Tab;
 
@@ -16,20 +17,25 @@ type Tab = browser.tabs.Tab;
   styles: []
 })
 export class BackgroundComponent {
-  constructor(browserService: BrowserService, obsidianService: ObsidianService, mercuryService: MercuryService, markdownService: MarkdownService) {
+  constructor(browserService: BrowserService, obsidianService: ObsidianService, articleParserService: ArticleParserService, markdownService: MarkdownService) {
     const exportMessage$ = new Subject<ExportMessage>()
     exportMessage$.pipe(
-      switchMap(({data}) => mercuryService.parse(data.url, {html: data.html})),
-      switchMap((result) => browser.storage.local.get(['vault', 'path']).then(res => ({config: res, ...result}))),
-      switchMap((result) => markdownService.convert(result.content ?? '').pipe(map(markdown => ({
+      switchMap(({data}) => articleParserService.parse(data.url, data.document).then(result => ({
         ...result,
-        content: markdown
-      })))),
-      switchMap(({
-                   title,
-                   content,
-                   config
-                 }) => obsidianService.new(config.vault, `${config.path}/${title}`, content ?? '')
+        selection: data.selection?.length ? data.selection : null
+      }))),
+      switchMap((result) => browser.storage.local.get(['vault', 'path']).then(res => ({config: res, ...result}))),
+      switchMap((result) => markdownService.convert(result.selection ?? result.content ?? '')
+        .then(markdown => ({
+          ...result,
+          content: markdown
+        }))),
+      switchMap(
+        ({
+           title,
+           content,
+           config
+         }) => obsidianService.new(config.vault, `${config.path}/${filenamify(title ?? '')}`, content ?? '')
       ),
       filter(({id}) => !!id),
       map(({id}) => id) as OperatorFunction<Tab, number>,

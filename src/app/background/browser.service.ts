@@ -1,10 +1,9 @@
 import {Injectable} from '@angular/core';
 import {filter} from "rxjs/operators";
 import {Observable} from 'rxjs';
-import {BackgroundModule} from "./background.module";
 
 @Injectable({
-  providedIn: BackgroundModule
+  providedIn: 'root'
 })
 export class BrowserService {
 
@@ -21,7 +20,8 @@ export class BrowserService {
 export interface ExportMessage {
   action: 'export'
   data: {
-    html: string,
-    url:string
+    document: string,
+    url:string,
+    selection?: string
   }
 }

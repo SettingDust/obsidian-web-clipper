@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
 import {fromPromise} from "rxjs/internal-compatibility";
-import {BackgroundModule} from "./background.module";
 
 @Injectable({
-  providedIn: BackgroundModule
+  providedIn: 'root'
 })
 export class ObsidianService {
 

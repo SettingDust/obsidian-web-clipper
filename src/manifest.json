@@ -33,5 +33,9 @@
   "options_ui": {
     "page": "index.html?#/options"
   },
-  "default_locale": "en"
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{f9ba18c5-f3fe-4521-868f-981520a55892}"
+    }
+  }
 }

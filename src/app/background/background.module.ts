@@ -3,8 +3,6 @@ import {CommonModule} from '@angular/common';
 
 import {BackgroundRoutingModule} from './background-routing.module';
 import {BackgroundComponent} from './background.component';
-import {BrowserService} from "./browser.service";
-import {ObsidianService} from "./obsidian.service";
 
 
 @NgModule({
@@ -15,7 +13,7 @@ import {ObsidianService} from "./obsidian.service";
     CommonModule,
     BackgroundRoutingModule
   ],
-  providers: [BrowserService, ObsidianService]
+  providers: []
 })
 export class BackgroundModule {
 }
