@@ -3,9 +3,11 @@
   "version": "0.2.0",
   "scripts": {
     "ng": "ng",
-    "build": "npm-run-all build:angular build:webext",
+    "lint": "cd ./dist && web-ext lint",
+    "build": "npm-run-all build:angular lint build:webext",
     "build:angular": "ng build",
     "build:webext": "cd ./dist && web-ext build",
+    "build:dev": "ng build --configuration development",
     "watch": "npm-run-all --parallel watch:angular watch:webext",
     "watch:angular": "ng build --watch --configuration development",
     "watch:webext": "cd ./dist && web-ext run --firefox=\"D:\\Program Files\\scoop\\apps\\firefox-developer-zh-cn\\current\\firefox.exe\""
