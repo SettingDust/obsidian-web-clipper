@@ -2,7 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/PrsPrsBK/ffext-manifest-schema/master/ffext.json",
   "manifest_version": 2,
   "name": "__MSG_extensionName__",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "__MSG_extensionDescription__",
   "permissions": [
     "tabs",
@@ -37,5 +37,6 @@
     "gecko": {
       "id": "{f9ba18c5-f3fe-4521-868f-981520a55892}"
     }
-  }
+  },
+  "default_locale": "en"
 }
