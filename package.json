@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "lint": "cd ./dist && web-ext lint",
+    "lint:dev": "npm-run-all build:dev lint",
     "build": "npm-run-all build:angular lint build:webext",
     "build:angular": "ng build",
     "build:webext": "cd ./dist && web-ext build",
