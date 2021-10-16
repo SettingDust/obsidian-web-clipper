@@ -16,4 +16,4 @@ npm install
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
 ## Package
-Run `npm run build` to build and compress to zip. The build `dist.zip` will be stored in the `dist/` directory.
+Run `npm run build` to build and package. The output zip will be stored in the `dist/web-ext-artifacts`.
