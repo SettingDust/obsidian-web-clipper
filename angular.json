@@ -156,11 +156,6 @@
             "polyfills": "projects/common/src/polyfills.ts",
             "tsConfig": "projects/common/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "projects/common/src/favicon.ico",
-              "projects/common/src/assets",
-              "projects/common/src/manifest.json"
-            ],
             "styles": [
               "projects/common/src/styles.scss"
             ],
@@ -190,8 +185,12 @@
               "assets": [
                 "projects/common/src/favicon.ico",
                 "projects/common/src/assets",
-                "projects/common/src/manifest.json",
-                "projects/common/src/_locales"
+                "projects/common/src/_locales",
+                {
+                  "input": "projects/common/src/production",
+                  "output": "/",
+                  "glob": "manifest.json"
+                }
               ]
             },
             "development": {
@@ -201,7 +200,12 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "namedChunks": true,
+              "assets": [
+                "projects/common/src/favicon.ico",
+                "projects/common/src/assets",
+                "projects/common/src/manifest.json"
+              ]
             }
           },
           "defaultConfiguration": "production"
