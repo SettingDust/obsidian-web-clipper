@@ -21,3 +21,8 @@ function getSelectionHtml() {
   }
   return html;
 }
+
+window.addEventListener("load", () => {
+  const shadowRoot = document.body.attachShadow({mode:'open'})
+  fetch(browser.runtime.getURL('index.html?#content')).then(it => it.text()).then(it => shadowRoot.innerHTML = it)
+})

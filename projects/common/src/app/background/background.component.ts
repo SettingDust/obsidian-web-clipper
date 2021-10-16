@@ -1,4 +1,4 @@
-/// <reference path="../../../node_modules/@types/firefox-webext-browser/index.d.ts"/>
+/// <reference path="../../../../../node_modules/@types/firefox-webext-browser/index.d.ts"/>
 
 import {Component} from '@angular/core';
 import {BrowserService, ExportMessage} from "./browser.service";

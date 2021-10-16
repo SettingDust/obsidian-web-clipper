@@ -23,12 +23,17 @@
   "content_scripts": [
     {
       "js": [
-        "content-script/content-script.js"
+        "content-script/polyfills.js",
+        "content-script/scripts.js",
+        "content-script/main.js"
       ],
       "matches": [
         "<all_urls>"
       ]
     }
+  ],
+  "web_accessible_resources": [
+    "index.html?#/content"
   ],
   "options_ui": {
     "page": "index.html?#/options"
@@ -37,6 +42,5 @@
     "gecko": {
       "id": "{f9ba18c5-f3fe-4521-868f-981520a55892}"
     }
-  },
-  "default_locale": "en"
+  }
 }
