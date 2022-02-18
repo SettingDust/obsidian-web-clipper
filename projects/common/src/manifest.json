@@ -23,17 +23,12 @@
   "content_scripts": [
     {
       "js": [
-        "content-script/polyfills.js",
-        "content-script/scripts.js",
-        "content-script/main.js"
+        "content-script/scripts.js"
       ],
       "matches": [
         "<all_urls>"
       ]
     }
-  ],
-  "web_accessible_resources": [
-    "index.html?#/content"
   ],
   "options_ui": {
     "page": "index.html?#/options"

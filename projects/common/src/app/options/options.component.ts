@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
-import {fromPromise} from "rxjs/internal-compatibility";
 import {switchMap, tap} from "rxjs/operators";
+import {from} from 'rxjs';
 
 @Component({
   selector: 'app-options',
@@ -20,9 +20,15 @@ export class OptionsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    fromPromise(browser.storage.local.get()).pipe(
+    // browser.storage.local.get("obsidianWebClipperOptions").then(res => this.form.patchValue(res))
+    // this.form.valueChanges.pipe(
+    //   tap(value => console.debug(`[obsidian-web-clipper] Options changed`, value))
+    // )
+    from(browser.storage.local.get()).pipe(
       tap(res => this.form.patchValue(res)),
       switchMap(() => this.form.valueChanges),
-    ).subscribe(value => browser.storage.local.set(value).then())
+      tap(value => console.debug(`[obsidian-web-clipper] Options changed`, value)),
+      switchMap(value => browser.storage.local.set(value))
+    ).subscribe()
   }
 }

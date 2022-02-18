@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "content-script": {
+    "content": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -35,8 +35,8 @@
           "strict": true
         }
       },
-      "root": "projects/content-script",
-      "sourceRoot": "projects/content-script/src",
+      "root": "projects/content",
+      "sourceRoot": "projects/content/src",
       "prefix": "app",
       "architect": {
         "build": {
@@ -44,23 +44,18 @@
           "options": {
             "outputPath": "dist/content-script",
             "index": "",
-            "main": "projects/content-script/src/main.ts",
-            "polyfills": "projects/content-script/src/polyfills.ts",
-            "tsConfig": "projects/content-script/tsconfig.app.json",
+            "main": "projects/content/src/main.ts",
+            "polyfills": "projects/content/src/polyfills.ts",
+            "tsConfig": "projects/content/tsconfig.app.json",
             "outputHashing": "none",
             "vendorChunk": false,
             "inlineStyleLanguage": "scss",
             "assets": [
-              "projects/content-script/src/assets"
+              "projects/content/src/assets"
             ],
-            "styles": [],
             "scripts": [
-              "node_modules/rxjs/bundles/rxjs.umd.js",
-              "node_modules/@angular/core/bundles/core.umd.js",
-              "node_modules/@angular/common/bundles/common.umd.js",
-              "node_modules/@angular/elements/bundles/elements.umd.js",
-              "node_modules/@angular/platform-browser/bundles/platform-browser.umd.js",
-              "node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js"
+              "projects/content/src/scripts/content.js",
+              "projects/content/src/scripts/load-app.js"
             ]
           },
           "configurations": {
@@ -79,8 +74,8 @@
               ],
               "fileReplacements": [
                 {
-                  "replace": "projects/content-script/src/environments/environment.ts",
-                  "with": "projects/content-script/src/environments/environment.prod.ts"
+                  "replace": "projects/content/src/environments/environment.ts",
+                  "with": "projects/content/src/environments/environment.prod.ts"
                 }
               ]
             },
@@ -88,8 +83,8 @@
               "buildOptimizer": false,
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true,
-              "namedChunks": true
+              "namedChunks": true,
+              "sourceMap": true
             }
           },
           "defaultConfiguration": "production"
@@ -98,10 +93,10 @@
           "builder": "ngx-build-plus:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "content-script:build:production"
+              "browserTarget": "content:build:production"
             },
             "development": {
-              "browserTarget": "content-script:build:development"
+              "browserTarget": "content:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -109,7 +104,7 @@
         "extract-i18n": {
           "builder": "ngx-build-plus:extract-i18n",
           "options": {
-            "browserTarget": "content-script:build"
+            "browserTarget": "content:build"
           }
         }
       }
@@ -148,7 +143,7 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "ngx-build-plus:browser",
           "options": {
             "outputPath": "dist",
             "index": "projects/common/src/index.html",
@@ -159,7 +154,8 @@
             "styles": [
               "projects/common/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+            ]
           },
           "configurations": {
             "production": {
@@ -211,7 +207,7 @@
           "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "ngx-build-plus:dev-server",
           "configurations": {
             "production": {
               "browserTarget": "common:build:production"

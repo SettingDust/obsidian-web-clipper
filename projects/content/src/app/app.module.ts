@@ -11,14 +11,12 @@ import {AppComponent} from './app.component';
   imports: [
     BrowserModule
   ],
-  providers: [],
-  entryComponents: [AppComponent]
+  providers: []
 })
 export class AppModule implements DoBootstrap {
   constructor(private injector: Injector) {
-    const elm = createCustomElement(AppComponent, {injector: this.injector});
     if (!customElements.get('obsidian-web-clipper')) {
-      customElements.define('obsidian-web-clipper', elm);
+      customElements.define('obsidian-web-clipper',createCustomElement(AppComponent, {injector}));
     }
   }
 

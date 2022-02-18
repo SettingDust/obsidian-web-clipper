@@ -1,5 +1,4 @@
 {
-  "$schema": "https://raw.githubusercontent.com/PrsPrsBK/ffext-manifest-schema/master/ffext.json",
   "manifest_version": 2,
   "name": "__MSG_extensionName__",
   "version": "0.2.0",
@@ -23,17 +22,12 @@
   "content_scripts": [
     {
       "js": [
-        "content-script/polyfills.js",
-        "content-script/scripts.js",
-        "content-script/main.js"
+        "content-script/scripts.js"
       ],
       "matches": [
         "<all_urls>"
       ]
     }
-  ],
-  "web_accessible_resources": [
-    "index.html?#/content"
   ],
   "options_ui": {
     "page": "index.html?#/options"

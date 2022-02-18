@@ -7,6 +7,5 @@ import TurndownService from "turndown";
 export class MarkdownService {
   private turndownService = new TurndownService()
 
-  convert = (html: string | TurndownService.Node) =>
-    Promise.resolve(this.turndownService.turndown(html))
+  convert = (html: string | TurndownService.Node) => this.turndownService.turndown(html)
 }
