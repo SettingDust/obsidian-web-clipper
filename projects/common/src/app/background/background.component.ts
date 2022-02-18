@@ -1,13 +1,11 @@
 import {Component} from '@angular/core';
 import {BrowserService, ExportMessage} from "./browser.service";
 import {ObsidianService} from "./obsidian.service";
-import {OperatorFunction, Subject, tap} from "rxjs";
+import {OperatorFunction, Subject} from "rxjs";
 import {filter, map, switchMap} from "rxjs/operators";
 import {MarkdownService} from "./markdown.service";
 import filenamify from "filenamify";
-import {extract} from "article-parser"
-
-type Tab = browser.tabs.Tab;
+import {ArticleParserService} from './article-parser.service';
 
 @Component({
   selector: 'app-background',
@@ -15,7 +13,7 @@ type Tab = browser.tabs.Tab;
   styles: []
 })
 export class BackgroundComponent {
-  constructor(browserService: BrowserService, obsidianService: ObsidianService, markdownService: MarkdownService) {
+  constructor(browserService: BrowserService, obsidianService: ObsidianService, markdownService: MarkdownService, articleParserService: ArticleParserService) {
     const exportMessage$ = new Subject<ExportMessage>()
 
     browserService.command("export").pipe(
@@ -26,7 +24,7 @@ export class BackgroundComponent {
     ).subscribe(res => exportMessage$.next(res))
 
     exportMessage$.pipe(
-      switchMap(({data}) => extract(data.document).then(result => ({
+      switchMap(({data}) => articleParserService.extract(data.document).then(result => ({
         ...result,
         selection: data.selection || null
       }))),
@@ -35,17 +33,6 @@ export class BackgroundComponent {
         ...result,
         content: markdownService.convert(result.selection ?? result.content ?? '')
       })),
-      tap(({
-             title,
-             content,
-             config
-           }) => {
-        console.debug(`[obsidian-web-clipper] Trying to new`, {
-          title,
-          content,
-          config
-        })
-      }),
       switchMap(
         ({
            title,
@@ -54,8 +41,7 @@ export class BackgroundComponent {
          }) => obsidianService.new(config.vault, `${config.path}/${filenamify(title ?? '')}`, content ?? '')
       ),
       filter(({id}) => !!id),
-      map(({id}) => id) as OperatorFunction<Tab, number>,
-      // switchMap(id => browser.tabs.remove(id))
+      switchMap(({id}) => browser.tabs.warmup(id!).then(() => browser.tabs.remove(id!)))
     ).subscribe()
   }
 }

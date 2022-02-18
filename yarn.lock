@@ -2803,7 +2803,7 @@ __metadata:
 
 "article-parser@https://github.com/SettingDust/article-parser#feat/browser_build":
   version: 6.0.0rc3
-  resolution: "article-parser@https://github.com/SettingDust/article-parser.git#commit=e4669bf1c64f05598591b238fa28813cd43c466a"
+  resolution: "article-parser@https://github.com/SettingDust/article-parser.git#commit=7d3781c9904958bf98a40ca85e9d1d425dc6d39b"
   dependencies:
     "@mozilla/readability": ^0.4.2
     axios: ^0.26.0
@@ -2813,7 +2813,7 @@ __metadata:
     linkedom: ^0.14.1
     sanitize-html: ^2.7.0
     string-comparison: "github:Rabbitzzc/js-string-comparison"
-  checksum: 47b4742a10151400aed4eacdf41e2a3928880544c4b6b5ecd1bd276a180311804cddf2e56cefd4e453891041d5240db8181085a5cb62b81d44fa6681e0431311
+  checksum: 7a8fb6a7fd5647e953864e0af62e987bb091281f01dc6dc5193694d4bd7aacbbe13f5d4e1e55af0ba9de85361af0599ee98fe7970c214ee97012c7c2446557eb
   languageName: node
   linkType: hard
 
