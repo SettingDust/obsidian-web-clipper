@@ -352,6 +352,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@availity/resolve-url@npm:^1.1.24":
+  version: 1.1.24
+  resolution: "@availity/resolve-url@npm:1.1.24"
+  dependencies:
+    "@babel/runtime": ^7.16.5
+    core-js: ^3.12.1
+  checksum: c004b071e7054bcca3e605b280b8b1af56fe2efcb8d36da28e42de9558b7c69c6db6fce4b40bb20e33d9197b90580db0f9768481ca1055178944961009423d7b
+  languageName: node
+  linkType: hard
+
 "@babel/code-frame@npm:^7.0.0, @babel/code-frame@npm:^7.16.7":
   version: 7.16.7
   resolution: "@babel/code-frame@npm:7.16.7"
@@ -1598,7 +1608,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.8.4":
+"@babel/runtime@npm:^7.16.5, @babel/runtime@npm:^7.8.4":
   version: 7.17.2
   resolution: "@babel/runtime@npm:7.17.2"
   dependencies:
@@ -2803,17 +2813,17 @@ __metadata:
 
 "article-parser@https://github.com/SettingDust/article-parser#feat/browser_build":
   version: 6.0.0rc3
-  resolution: "article-parser@https://github.com/SettingDust/article-parser.git#commit=7d3781c9904958bf98a40ca85e9d1d425dc6d39b"
+  resolution: "article-parser@https://github.com/SettingDust/article-parser.git#commit=5ba79edd532cf62f2b01cff9787196a1dfb33706"
   dependencies:
     "@mozilla/readability": ^0.4.2
     axios: ^0.26.0
-    bellajs: ^11.0.0
+    bellajs: ^11.0.1
     debug: ^4.3.3
     html-crush: ^5.0.12
-    linkedom: ^0.14.1
+    linkedom: ^0.14.2
     sanitize-html: ^2.7.0
-    string-comparison: "github:Rabbitzzc/js-string-comparison"
-  checksum: 7a8fb6a7fd5647e953864e0af62e987bb091281f01dc6dc5193694d4bd7aacbbe13f5d4e1e55af0ba9de85361af0599ee98fe7970c214ee97012c7c2446557eb
+    string-comparison: ^1.1.0
+  checksum: 18c090dc7d3bc6ab5150884d688e3fb9bac33aec6d9f6ee83e40c1df50f145e9b5078f96cee6b3eb7895bd0a0553a799604bd15be82a9b37ab23c8772c376fe3
   languageName: node
   linkType: hard
 
@@ -3061,7 +3071,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bellajs@npm:^11.0.0":
+"bellajs@npm:^11.0.1":
   version: 11.0.1
   resolution: "bellajs@npm:11.0.1"
   checksum: d0863c54c7f1451301fd4174d8f3c031c59edaeed4801764cc5eb2d7a892adedee6e09d0bc94c6507953113de500b066b58d6636113424bbfc6bc9307b6ad8ed
@@ -3960,6 +3970,13 @@ __metadata:
   version: 3.21.0
   resolution: "core-js@npm:3.21.0"
   checksum: 87df49aa2c5d0a521c52102b6669842dd30b334742e86dd4e0173c51230bc48d610060ab6de0f149766d188325b8c1b84598f901cf455674fe6c03ccc5c8026f
+  languageName: node
+  linkType: hard
+
+"core-js@npm:^3.12.1":
+  version: 3.21.1
+  resolution: "core-js@npm:3.21.1"
+  checksum: d68eddd831340ad5b24ac29c72fda022a43b17f194c4278b6b875a843283d316502cb4abd07f28631d6ebc4387f66aa06e2b1b3c8fd7e08096a751b5c63f6889
   languageName: node
   linkType: hard
 
@@ -7375,16 +7392,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"linkedom@npm:^0.14.1":
-  version: 0.14.1
-  resolution: "linkedom@npm:0.14.1"
+"linkedom@npm:^0.14.2":
+  version: 0.14.2
+  resolution: "linkedom@npm:0.14.2"
   dependencies:
     css-select: ^4.2.1
     cssom: ^0.5.0
     html-escaper: ^3.0.3
     htmlparser2: ^7.2.0
     uhyphen: ^0.1.0
-  checksum: 07f47147425425b4e5f9589bc95fdcd626951168377809999f1c80adeaa8d9c6085d47f31acdf8b642d1ebb2201d77923cec035cbc3e2ece2fefbb72f1c977fb
+  checksum: 8d4e65a52fbcebac09f48e58074c77da16f307aaf6a05d699f1c08b8246b317f09b3958a73b13d9e4307601ee9a0aa273022de3b43e19528962c43a947181aa6
   languageName: node
   linkType: hard
 
@@ -8499,6 +8516,7 @@ __metadata:
     "@angular/platform-browser": ~13.2.2
     "@angular/platform-browser-dynamic": ~13.2.2
     "@angular/router": ~13.2.2
+    "@availity/resolve-url": ^1.1.24
     "@types/firefox-webext-browser": ^94.0.1
     "@types/node": ~16.11.24
     "@types/sanitize-html": ^2.6.2
@@ -10906,10 +10924,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"string-comparison@github:Rabbitzzc/js-string-comparison":
-  version: 1.0.9
-  resolution: "string-comparison@https://github.com/Rabbitzzc/js-string-comparison.git#commit=fdbfd7a916d01cd9912ba88a76b2dfa03f69e9d8"
-  checksum: 985279a76569ebfb749bbd7a89afb6186a961bb8a00c928e701591bd9d20ffed9ffe0c0fe0ddd10ae89fbedbdb52cbf8860162378a4af0b9b14a7c735b885ed3
+"string-comparison@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "string-comparison@npm:1.1.0"
+  checksum: 7cdb7958a45885fa856fe7768916b98a9cfdeb12cb60c23f28bdddc67fb6ecd9e272841f505ea1c6af97fbe0d227f0a0237e5a750d014a2310da8ccb441589b5
   languageName: node
   linkType: hard
 

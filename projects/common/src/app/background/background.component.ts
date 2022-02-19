@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
-import {BrowserService, ExportMessage} from "./browser.service";
+import {BrowserService,} from "./browser.service";
 import {ObsidianService} from "./obsidian.service";
-import {OperatorFunction, Subject} from "rxjs";
-import {filter, map, switchMap} from "rxjs/operators";
+import {combineLatest, from, mapTo, of} from "rxjs";
+import {filter, map, switchMap, tap} from "rxjs/operators";
 import {MarkdownService} from "./markdown.service";
 import filenamify from "filenamify";
 import {ArticleParserService} from './article-parser.service';
@@ -14,34 +14,27 @@ import {ArticleParserService} from './article-parser.service';
 })
 export class BackgroundComponent {
   constructor(browserService: BrowserService, obsidianService: ObsidianService, markdownService: MarkdownService, articleParserService: ArticleParserService) {
-    const exportMessage$ = new Subject<ExportMessage>()
-
-    browserService.command("export").pipe(
-      switchMap(() => browser.tabs.query({active: true})),
-      map((tabs) => tabs[0].id),
-      filter((id) => !!id) as OperatorFunction<number | undefined, number>,
-      switchMap((id) => browser.tabs.sendMessage(id, {action: 'export'}) as Promise<ExportMessage>)
-    ).subscribe(res => exportMessage$.next(res))
-
-    exportMessage$.pipe(
-      switchMap(({data}) => articleParserService.extract(data.document).then(result => ({
-        ...result,
-        selection: data.selection || null
-      }))),
-      switchMap((result) => browser.storage.local.get(['vault', 'path']).then(res => ({config: res, ...result}))),
-      map((result) => ({
-        ...result,
-        content: markdownService.convert(result.selection ?? result.content ?? '')
-      })),
-      switchMap(
-        ({
-           title,
-           content,
-           config
-         }) => obsidianService.new(config.vault, `${config.path}/${filenamify(title ?? '')}`, content ?? '')
+    combineLatest([
+      browserService.command("export").pipe(
+        switchMap(() => browser.tabs.query({active: true})),
+        map(tabs => tabs[0].id),
+        filter((id): id is number => !!id),
       ),
-      filter(({id}) => !!id),
-      switchMap(({id}) => browser.tabs.warmup(id!).then(() => browser.tabs.remove(id!)))
+      of('export')
+    ]).pipe(
+      switchMap((arg) => browserService.action(arg as [number, 'export'])),
+      switchMap(({data}) => combineLatest([
+        articleParserService.extract(data).pipe(
+          tap(data => data.content = markdownService.convert(data.content ?? ''))
+        ),
+        browser.storage.local.get(['vault', 'path'])
+      ])),
+      map(([{title, content}, {vault, path}]) => ({title: title ?? '', content, vault: vault ?? '', path: path ?? ''})),
+      switchMap(({title, content, vault, path}) => obsidianService.new(vault, `${path}/${filenamify(title)}`, content)),
+      map(({id}) => id),
+      filter((id): id is number => !!id),
+      switchMap((id) => from(browser.tabs.warmup(id)).pipe(mapTo(id))),
+      switchMap(id => browser.tabs.remove(id))
     ).subscribe()
   }
 }
