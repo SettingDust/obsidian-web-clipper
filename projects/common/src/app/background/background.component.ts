@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {BrowserService,} from "./browser.service";
 import {ObsidianService} from "./obsidian.service";
-import {combineLatest, from, mapTo, of} from "rxjs";
+import {combineLatest, of} from "rxjs";
 import {filter, map, switchMap, tap} from "rxjs/operators";
 import {MarkdownService} from "./markdown.service";
 import filenamify from "filenamify";
@@ -30,10 +30,14 @@ export class BackgroundComponent {
         browser.storage.local.get(['vault', 'path'])
       ])),
       map(([{title, content}, {vault, path}]) => ({title: title ?? '', content, vault: vault ?? '', path: path ?? ''})),
-      switchMap(({title, content, vault, path}) => obsidianService.new(vault, `${path}/${filenamify(title)}`, content)),
+      map(({title, content, vault, path}) => ({name: `${path}/${filenamify(title)}`, content, vault})),
+      switchMap((data) => obsidianService.api('new', data)),
+      map(url => url.toString()),
+      map(obsidianService.plusToSpace),
+      switchMap(url => browserService.tab.create({url})),
       map(({id}) => id),
       filter((id): id is number => !!id),
-      switchMap((id) => from(browser.tabs.warmup(id)).pipe(mapTo(id))),
+      switchMap(id => browserService.tab.warmup(id)),
       switchMap(id => browser.tabs.remove(id))
     ).subscribe()
   }

@@ -19,14 +19,13 @@ export class ArticleParserService {
       this.parseDocument,
       combineLatestWith(of(url)),
       this.absolutify,
-    ).pipe(defaultIfEmpty(() => undefined)) as Observable<Document | undefined>,
+    ).pipe(defaultIfEmpty(undefined)),
     extract(document)
   ]).pipe(
     switchMap(([selection, articleData]) => of(selection).pipe(
-      filter((selection): selection is Document => !!selection),
-      tap((selection) => articleData.content = selection.documentElement.outerHTML),
+      tap((selection) => articleData.content = selection?.documentElement?.outerHTML ?? articleData.content),
       mapTo(articleData)
-    ).pipe(defaultIfEmpty(articleData)))
+    ))
   )
 
 
@@ -52,7 +51,8 @@ export class ArticleParserService {
                     element.setAttribute(attr, absoluteUrl as unknown as string)),
                   mapTo(document)
                 )
-              ))
+              )
+            )
           ))
         ))
       )
