@@ -3,7 +3,6 @@ import {extract} from 'article-parser';
 import {combineLatest, combineLatestWith, defaultIfEmpty, from, mapTo, Observable, of, switchMap, tap} from 'rxjs';
 import {filter, map} from 'rxjs/operators';
 import resolveUrl from '@availity/resolve-url';
-import {ExportData} from './browser.service';
 
 @Injectable({
   providedIn: 'root'
@@ -58,4 +57,10 @@ export class ArticleParserService {
       )
     ))
   )
+}
+
+export interface ExportData {
+  document: string
+  url: string
+  selection?: string
 }

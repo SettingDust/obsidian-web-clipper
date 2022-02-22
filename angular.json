@@ -52,10 +52,6 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "projects/content/src/assets"
-            ],
-            "scripts": [
-              "projects/content/src/scripts/content.js",
-              "projects/content/src/scripts/load-app.js"
             ]
           },
           "configurations": {

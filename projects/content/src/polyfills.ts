@@ -53,3 +53,5 @@ import 'zone.js'; // Included with Angular CLI.
  */
 
 import '@webcomponents/custom-elements'
+
+import './scripts/content'

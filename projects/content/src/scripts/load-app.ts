@@ -3,3 +3,5 @@
   elem.src = browser.runtime.getURL(`content-script/${path}`)
   document.body.appendChild(elem)
 })
+
+export {}
