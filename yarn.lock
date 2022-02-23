@@ -505,13 +505,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@availity/resolve-url@npm:^1.1.24":
-  version: 1.1.24
-  resolution: "@availity/resolve-url@npm:1.1.24"
+"@availity/resolve-url@npm:^1.1.25":
+  version: 1.1.25
+  resolution: "@availity/resolve-url@npm:1.1.25"
   dependencies:
     "@babel/runtime": ^7.16.5
     core-js: ^3.12.1
-  checksum: c004b071e7054bcca3e605b280b8b1af56fe2efcb8d36da28e42de9558b7c69c6db6fce4b40bb20e33d9197b90580db0f9768481ca1055178944961009423d7b
+  checksum: 6e9147777a1f970080c7a58c8e68335d4f1ac6bb04b74dd77478052f647c5e9524dc8ae21bf35678b8f33840dd75f2ade14fa8ca89fdcab02fa91679504cbce8
   languageName: node
   linkType: hard
 
@@ -8922,7 +8922,7 @@ __metadata:
     "@angular/platform-browser": ~13.2.3
     "@angular/platform-browser-dynamic": ~13.2.3
     "@angular/router": ~13.2.3
-    "@availity/resolve-url": ^1.1.24
+    "@availity/resolve-url": ^1.1.25
     "@types/firefox-webext-browser": ^94.0.1
     "@types/node": ^16.0.0
     "@types/sanitize-html": ^2.6.2

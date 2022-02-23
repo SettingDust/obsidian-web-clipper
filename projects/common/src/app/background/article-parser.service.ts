@@ -45,9 +45,8 @@ export class ArticleParserService {
             of(element.getAttribute(attr)).pipe(
               filter((value): value is string => !!value),
               switchMap(value =>
-                of(resolveUrl({relative: value, base: baseUrl}) as unknown as string).pipe(
-                  tap(absoluteUrl => // FIXME https://github.com/Availity/sdk-js/issues/486
-                    element.setAttribute(attr, absoluteUrl as unknown as string)),
+                of(resolveUrl({relative: value, base: baseUrl})).pipe(
+                  tap(absoluteUrl => element.setAttribute(attr, absoluteUrl)),
                   mapTo(document)
                 )
               )
