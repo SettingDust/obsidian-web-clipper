@@ -1,5 +1,6 @@
 import {ActionData} from "projects/common/src/action"
 import $background from "./background-listener"
+import { getSelectionHtml } from "./utils"
 
 export type ExportBackgroundAction = ActionData<undefined, {
   document: string

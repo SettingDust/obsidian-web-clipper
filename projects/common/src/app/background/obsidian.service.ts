@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {combineLatest, from, mapTo, of, switchMap, tap} from 'rxjs';
+import {of, tap} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,14 +9,7 @@ export class ObsidianService {
 
   api = <Action extends keyof Actions>(action: Action, data: Actions[Action]) =>
     of(new URL(`${this.BASE_URL}${action}`)).pipe(
-      switchMap(url => combineLatest([
-          of(url.searchParams),
-          from(Object.entries(data))
-        ]).pipe(
-          tap(([params, [key, value]]) => params.append(key, String(value))),
-          mapTo(url)
-        )
-      )
+      tap(({searchParams}) => Object.entries(data).forEach(([key, value]) => searchParams.append(key, String(value))))
     )
 
   plusToSpace = (url: string) => url.replace(/\+/g, '%20')

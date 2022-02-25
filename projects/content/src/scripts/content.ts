@@ -1,4 +1,3 @@
-Promise.all([
-  import('./load-app'),
-  import ('./background-listener')]
-).then()
+import './load-app'
+import './error-action'
+import './export-action'

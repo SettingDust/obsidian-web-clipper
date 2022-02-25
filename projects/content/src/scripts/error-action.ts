@@ -5,4 +5,7 @@ export type ErrorBackgroundAction = ActionData<{
   message: string
 }, undefined>
 
-$background.message.action('error').subscribe(error => console.warn(error))
+$background.message.action('error').subscribe(({message, sender, respond}) => {
+  console.warn(message)
+  respond()
+})

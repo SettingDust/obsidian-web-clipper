@@ -15,8 +15,7 @@ import {ArticleParserService} from './article-parser.service';
 export class BackgroundComponent {
   constructor(browserService: BrowserService, obsidianService: ObsidianService, markdownService: MarkdownService, articleParserService: ArticleParserService) {
     browserService.command("export").pipe(
-      switchMap(() => browser.tabs.query({active: true})),
-      map(tabs => tabs[0].id),
+      switchMap(() => browser.tabs.query({active: true}).then(tabs => tabs[0].id)),
       filter((id): id is number => !!id),
       switchMap(id => browserService.action(id, 'export').pipe(
         switchMap(({data}) => combineLatest([
@@ -24,27 +23,29 @@ export class BackgroundComponent {
             tap(data => data.content = markdownService.convert(data.content ?? ''))
           ),
           browser.storage.local.get(['vault', 'path'])
-        ])),
-        map(([{title, content}, {vault, path}]) => ({
-          title: title ?? '',
-          content,
-          vault: vault ?? '',
-          path: path ?? ''
-        })),
-        map(({title, content, vault, path}) => ({name: `${path}/${filenamify(title)}`, content, vault})),
-        switchMap((data) => obsidianService.api('new', data)),
-        map(url => url.toString()),
-        map(obsidianService.plusToSpace),
-        switchMap(url => browserService.tab.create({url})),
-        map(({id}) => id),
-        filter((id): id is number => !!id),
-        switchMap(id => browserService.tab.warmup(id)),
-        switchMap(id => browser.tabs.remove(id)),
+        ]).pipe(
+          map(([{title, content}, {vault, path}]) => ({
+            title: title ?? '',
+            content,
+            vault: vault ?? '',
+            path: path ?? ''
+          })),
+          map(({title, content, vault, path}) => ({name: `${path}/${filenamify(title)}`, content, vault}))
+        )),
+        switchMap((data) => obsidianService.api('new', data).pipe(
+          map(url => obsidianService.plusToSpace(url.toString())),
+        )),
+        switchMap(url => browserService.tab.create({url}).pipe(
+          map(({id}) => id),
+          filter((id): id is number => !!id),
+          switchMap(id => browserService.tab.warmup(id)),
+          switchMap(id => browser.tabs.remove(id))
+        )),
         catchError((err, caught) => {
-          browserService.action(id, 'error')
+          browserService.action(id, 'error', Object.create(err))
           return of({err, caught})
         })
       ))
-    )
+    ).subscribe()
   }
 }

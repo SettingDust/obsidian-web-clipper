@@ -1,4 +1,4 @@
-function getSelectionHtml() {
+export function getSelectionHtml() {
   let html = undefined;
   const sel = window.getSelection();
   if (sel?.rangeCount) {
