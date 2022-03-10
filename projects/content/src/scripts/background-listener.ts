@@ -1,8 +1,8 @@
-import {filter, Observable} from "rxjs";
+import {filter, from, Observable} from "rxjs";
 import {ActionDataType, ActionMessage, Actions} from "projects/common/src/action"
 import {ExportBackgroundAction} from './export-action';
-import MessageSender = browser.runtime.MessageSender;
 import {ErrorBackgroundAction} from './error-action';
+import MessageSender = browser.runtime.MessageSender;
 
 export interface BackgroundActions extends Actions {
   export: ExportBackgroundAction,
@@ -31,9 +31,13 @@ const $listener = new Observable<BackgroundMessageListener<any>>(subscriber =>
 const $background = {
   message: {
     listener: <T extends BackgroundAction>() => $listener as Observable<BackgroundMessageListener<T>>,
-    action: <T extends BackgroundAction>(action: T) => $background.message.listener<T>().pipe(
+    actionListener: <T extends BackgroundAction>(action: T) => $background.message.listener<T>().pipe(
       filter(({message}) => message.action === action),
-    )
+    ),
+    action: <T extends BackgroundAction, U extends BackgroundActionMessage<T, 'send'>['data']>(
+      action: T,
+      data?: U
+    ): Observable<BackgroundActionMessage<T, 'receive'>> => from(browser.runtime.sendMessage({action, data}))
   }
 }
 

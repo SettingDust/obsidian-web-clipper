@@ -3,8 +3,20 @@
     {{ "optionVault" | i18n }}
     <input formControlName="vault">
   </label>
-  <label>
-    {{ "optionPath" | i18n }}
-    <input formControlName="path">
-  </label>
+
+  <div formArrayName="paths">
+    <h2> {{ "optionPaths" | i18n }}</h2>
+    <button (click)="addPath()">{{ "optionsAddPath" | i18n }}</button>
+
+    <div *ngFor="let path of paths.controls; let i=index" [formGroupName]="i">
+      <label>
+        {{ "optionHotkey" | i18n }}
+        <input type="text" formControlName="hotkey">
+      </label>
+      <label>
+        {{ "optionPath" | i18n }}
+        <input type="text" formControlName="path">
+      </label>
+    </div>
+  </div>
 </form>

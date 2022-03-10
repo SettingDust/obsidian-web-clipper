@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {extract} from 'article-parser';
+import {ArticleData, extract} from 'article-parser';
 import {combineLatest, combineLatestWith, defaultIfEmpty, from, mapTo, Observable, of, switchMap, tap} from 'rxjs';
 import {filter, map} from 'rxjs/operators';
 import resolveUrl from '@availity/resolve-url';
@@ -12,7 +12,7 @@ export class ArticleParserService {
   constructor() {
   }
 
-  extract = ({url, document, selection}: ExportData) => combineLatest([
+  extract = ({url, document, selection}: ExportData): Observable<ArticleData> => combineLatest([
     of(selection).pipe(
       filter((selection): selection is string => !!selection),
       this.parseDocument,
@@ -62,4 +62,5 @@ export interface ExportData {
   document: string
   url: string
   selection?: string
+  path?: string
 }

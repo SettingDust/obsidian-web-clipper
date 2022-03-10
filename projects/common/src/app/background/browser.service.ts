@@ -1,23 +1,39 @@
 import {Injectable} from '@angular/core';
-import {filter} from "rxjs/operators";
+import {filter, map} from "rxjs/operators";
 import {from, mapTo, Observable} from 'rxjs';
 import {ActionData, ActionDataType, ActionMessage, Actions} from '../../action';
 import {ExportData} from './article-parser.service';
+import MessageSender = browser.runtime.MessageSender;
 
 @Injectable({
   providedIn: 'root'
 })
 export class BrowserService {
+  private $listener = new Observable<ContentMessageListener<any>>(subscriber =>
+    browser.runtime.onMessage.addListener((
+        message,
+        sender,
+        respond
+      ) => subscriber.next({message, sender, respond})
+    )
+  )
 
-  private command$ = new Observable<string>(subscriber => browser.commands.onCommand.addListener(it => subscriber.next(it)))
-
-  command = (command: Commands) => this.command$.pipe(filter(it => it === command))
-
-  action = <T extends ContentAction, U extends ContentActionMessage<T, 'send'>['data']>(
-    tab: number,
-    action: T,
-    data?: U
-  ): Observable<ContentActionMessage<T, 'receive'>> => from(browser.tabs.sendMessage(tab, {action, data}))
+  message = {
+    listener: <T extends ContentAction>() => this.$listener as Observable<ContentMessageListener<T>>,
+    actionListener: <T extends ContentAction>(action: T) => this.message.listener<T>().pipe(
+      filter(({message}) => message.action === action),
+      map(({message: {data}, sender, respond}) => ({
+        message: data,
+        sender,
+        respond
+      } as ContentMessageListener<T> & { message: ContentActionMessage<T, 'receive'>['data'] }))
+    ),
+    action: <T extends ContentAction, U extends ContentActionMessage<T, 'send'>['data']>(
+      tab: number,
+      action: T,
+      data?: U
+    ): Observable<ContentActionMessage<T, 'receive'>> => from(browser.tabs.sendMessage(tab, {action, data}))
+  }
 
   tab = {
     create: ({url, active = false}: { url: string, active?: boolean }): Observable<browser.tabs.Tab> =>
@@ -33,5 +49,11 @@ export interface ContentActions extends Actions {
 export type ContentAction = keyof ContentActions
 
 export type ContentActionMessage<T extends ContentAction, U extends ActionDataType> = ActionMessage<ContentActions, T, U>
+
+type ContentMessageListener<T extends ContentAction> = {
+  message: ContentActionMessage<T, 'receive'>
+  sender: MessageSender
+  respond: (response?: ContentActionMessage<T, 'send'>) => void
+}
 
 export type Commands = 'export'

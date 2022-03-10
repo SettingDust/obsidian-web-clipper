@@ -2986,9 +2986,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"article-parser@npm:6.0.0-rc4":
-  version: 6.0.0-rc4
-  resolution: "article-parser@npm:6.0.0-rc4"
+"article-parser@npm:6.0.0-rc7":
+  version: 6.0.0-rc7
+  resolution: "article-parser@npm:6.0.0-rc7"
   dependencies:
     "@mozilla/readability": ^0.4.2
     axios: ^0.26.0
@@ -2998,7 +2998,8 @@ __metadata:
     linkedom: ^0.14.2
     sanitize-html: ^2.7.0
     string-comparison: ^1.1.0
-  checksum: cb57a45240879be46a7778a597044b3aa7a5e53fc8068c0e6a74b2f77e154f8a89b892e728a0745b74b2f80a6caa97f0e5283de25b4827da415b1adf67c5635f
+    urlpattern-polyfill: ^1.0.0-rc5
+  checksum: b9ed23b1a4567b6d73a57740964a5757792f7262fe4e0e5878d609a126a0868a744d5df71b829bbd8ec12b4f0f5cfc82d10416f4515b5a510e7c2260a81bed76
   languageName: node
   linkType: hard
 
@@ -6531,6 +6532,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"hotkeys-js@npm:^3.8.7":
+  version: 3.8.7
+  resolution: "hotkeys-js@npm:3.8.7"
+  checksum: 1eb6df2781e8e49a80c72930d5c69ed50ea16d1dbef0667512059f5b5d1551bfdce3024c25d99275ab567e0b7ae0fbf292971542ea347ed8b7b585eab4e99287
+  languageName: node
+  linkType: hard
+
 "hpack.js@npm:^2.1.6":
   version: 2.1.6
   resolution: "hpack.js@npm:2.1.6"
@@ -8928,13 +8936,15 @@ __metadata:
     "@types/sanitize-html": ^2.6.2
     "@types/turndown": ^5.0.1
     "@webcomponents/custom-elements": ^1.5.0
-    article-parser: 6.0.0-rc4
+    article-parser: 6.0.0-rc7
     eta: ^1.12.3
     filenamify: 5.1.0
+    hotkeys-js: ^3.8.7
     ngx-build-plus: 13.0.1
     node-polyfill-webpack-plugin: ^1.1.4
     npm-run-all: ^4.1.5
     rxjs: ~7.5.4
+    tinykeys: ^1.4.0
     tslib: ^2.3.1
     turndown: ^7.1.1
     typescript: ^4.5.5
@@ -11729,6 +11739,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tinykeys@npm:^1.4.0":
+  version: 1.4.0
+  resolution: "tinykeys@npm:1.4.0"
+  checksum: 1a285204116f1150d761a5c34bac9340e9c66a2b1a619311c3e0581168bc086a0ba9ae844774b82cb3393a121def5738c1f33f426135052d5acbf7863e9268d2
+  languageName: node
+  linkType: hard
+
 "tmp@npm:0.2.1":
   version: 0.2.1
   resolution: "tmp@npm:0.2.1"
@@ -12100,6 +12117,13 @@ __metadata:
     punycode: 1.3.2
     querystring: 0.2.0
   checksum: 50d100d3dd2d98b9fe3ada48cadb0b08aa6be6d3ac64112b867b56b19be4bfcba03c2a9a0d7922bfd7ac17d4834e88537749fe182430dfd9b68e520175900d90
+  languageName: node
+  linkType: hard
+
+"urlpattern-polyfill@npm:^1.0.0-rc5":
+  version: 1.0.0-rc5
+  resolution: "urlpattern-polyfill@npm:1.0.0-rc5"
+  checksum: 22fbbd3f6044301b7fc44445695c6062f3db9fb85baab1aaa93b1087e430a806dc36760946469320a1b7d4b2a90d77da918269165e15e1bafc01e6c021030701
   languageName: node
   linkType: hard
 

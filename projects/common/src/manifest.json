@@ -8,14 +8,6 @@
     "tabs",
     "storage"
   ],
-  "commands": {
-    "export": {
-      "description": "__MSG_exportCommandDescription__",
-      "suggested_key": {
-        "default": "Alt+O"
-      }
-    }
-  },
   "background": {
     "page": "index.html?#/background",
     "persistent": true
