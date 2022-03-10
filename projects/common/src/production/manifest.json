@@ -7,14 +7,6 @@
     "tabs",
     "storage"
   ],
-  "commands": {
-    "export": {
-      "description": "__MSG_exportCommandDescription__",
-      "suggested_key": {
-        "default": "Alt+O"
-      }
-    }
-  },
   "background": {
     "page": "index.html?#/background",
     "persistent": true
@@ -22,7 +14,7 @@
   "content_scripts": [
     {
       "js": [
-        "content-script/scripts.js"
+        "content-script/content-script.js"
       ],
       "matches": [
         "<all_urls>"
