@@ -30,5 +30,8 @@
   "optionAddPath": {
     "message": "添加路径",
     "description": "Add a path"
+  },
+  "optionProtocolAlert": {
+    "message": "点击绑定 URL Scheme 协议"
   }
 }

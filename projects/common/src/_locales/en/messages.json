@@ -30,5 +30,8 @@
   "optionAddPath": {
     "message": "Add path",
     "description": "Add a path"
+  },
+  "optionProtocolAlert": {
+    "message": "Click to bind url scheme protocol"
   }
 }
