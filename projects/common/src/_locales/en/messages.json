@@ -11,6 +11,10 @@
     "message": "Vault",
     "description": "The label of vault option"
   },
+  "optionVaultDescription": {
+    "message": "Optional, current/latest vault if empty",
+    "description": "The description of vault option"
+  },
   "optionPaths": {
     "message": "Paths",
     "description": "The label of paths option"

@@ -1,13 +1,14 @@
 <form [formGroup]="form" id="options">
-  <label>
-    {{ "optionVault" | i18n }}
-    <input formControlName="vault">
-  </label>
+  <div>
+    <label>
+      {{ "optionVault" | i18n }}
+      <input formControlName="vault">
+    </label>
+    <span>{{ "optionVaultDescription" | i18n }}</span>
+  </div>
 
   <div formArrayName="paths">
-    <h2> {{ "optionPaths" | i18n }}</h2>
-    <button (click)="addPath()">{{ "optionsAddPath" | i18n }}</button>
-
+    <h3> {{ "optionPaths" | i18n }}</h3>
     <div *ngFor="let path of paths.controls; let i=index" [formGroupName]="i">
       <label>
         {{ "optionHotkey" | i18n }}
@@ -18,5 +19,6 @@
         <input type="text" formControlName="path">
       </label>
     </div>
+    <button (click)="addPath()">+ {{ "optionAddPath" | i18n }}</button>
   </div>
 </form>

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormArray, FormBuilder, Validators} from "@angular/forms";
+import {AbstractControl, FormArray, FormBuilder, Validators} from "@angular/forms";
 import {switchMap, tap} from "rxjs/operators";
 import {from} from 'rxjs';
 
@@ -12,16 +12,7 @@ export class OptionsComponent implements OnInit {
   form = this.fb.group(
     {
       vault: this.fb.control('', [Validators.required]),
-      paths: this.fb.array([
-        this.fb.group({
-          hotkey: this.fb.control('m o', [Validators.required]),
-          path: this.fb.control('Memo', [Validators.required])
-        }),
-        this.fb.group({
-          hotkey: this.fb.control('r l', [Validators.required]),
-          path: this.fb.control('ReadLater', [Validators.required])
-        })
-      ])
+      paths: this.fb.array([])
     }
   )
 
@@ -30,10 +21,25 @@ export class OptionsComponent implements OnInit {
 
   ngOnInit(): void {
     from(browser.storage.local.get()).pipe(
-      tap(res => this.form.patchValue(res)),
-      switchMap(() => this.form.valueChanges),
-      tap(value => value.paths = value.paths.filter((it: { hotkey: string, path: string }) => !!it?.hotkey)),
-      tap(value => console.debug(`[obsidian-web-clipper] Options changed`, value)),
+      tap(res => {
+        this.form.patchValue({vault: res.vault})
+        if (!res.paths?.length) {
+          res.paths = [
+            {hotkey: 'r l', path: 'ReadLater'},
+            {hotkey: 'm o', path: 'Memo'}
+          ]
+        }
+        res.paths.map((pair: { hotkey: string; path: string; }) => this.fb.group({
+          hotkey: this.fb.control(pair.hotkey, [Validators.required]),
+          path: this.fb.control(pair.path, [Validators.required])
+        })).forEach((group: AbstractControl) => this.paths.push(group))
+      })
+    ).subscribe()
+    this.form.valueChanges.pipe(
+      tap(value => {
+        value.paths = value.paths.filter((it: { hotkey: string, path: string }) => !!it?.hotkey)
+        console.debug(`[obsidian-web-clipper] Options changed`, value)
+      }),
       switchMap(value => browser.storage.local.set(value))
     ).subscribe()
   }

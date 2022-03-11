@@ -194,6 +194,7 @@
               "sourceMap": true,
               "namedChunks": true,
               "assets": [
+                "projects/common/src/_locales",
                 "projects/common/src/favicon.ico",
                 "projects/common/src/assets",
                 "projects/common/src/manifest.json"

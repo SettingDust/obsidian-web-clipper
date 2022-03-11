@@ -1,11 +1,7 @@
 # ObsidianWebClipper
 ## Installation
 ```shell
-# If you're using yarn
-yarn install
-
-# If you're using npm
-npm install
+yarn
 ```
 
 ## Build

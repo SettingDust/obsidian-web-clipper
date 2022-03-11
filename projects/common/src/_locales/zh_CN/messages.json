@@ -8,8 +8,12 @@
     "description": "Description of the extension."
   },
   "optionVault": {
-    "message": "知识库",
+    "message": "库",
     "description": "The label of vault option"
+  },
+  "optionVaultDescription": {
+    "message": "可选，如果留空就是当前或最后使用的库",
+    "description": "The description of vault option"
   },
   "optionPaths": {
     "message": "全部路径",
