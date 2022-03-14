@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AbstractControl, FormArray, FormBuilder, Validators} from "@angular/forms";
+import {FormArray, FormBuilder, Validators} from "@angular/forms";
 import {switchMap, tap} from "rxjs/operators";
 import {from} from 'rxjs';
 
@@ -23,16 +23,7 @@ export class OptionsComponent implements OnInit {
     from(browser.storage.local.get()).pipe(
       tap(res => {
         this.form.patchValue({vault: res.vault})
-        if (!res.paths?.length) {
-          res.paths = [
-            {hotkey: 'r l', path: 'ReadLater'},
-            {hotkey: 'm o', path: 'Memo'}
-          ]
-        }
-        res.paths.map((pair: { hotkey: string; path: string; }) => this.fb.group({
-          hotkey: this.fb.control(pair.hotkey, [Validators.required]),
-          path: this.fb.control(pair.path, [Validators.required])
-        })).forEach((group: AbstractControl) => this.paths.push(group))
+        res.paths.forEach(this.addPath)
       })
     ).subscribe()
     this.form.valueChanges.pipe(
@@ -48,10 +39,10 @@ export class OptionsComponent implements OnInit {
     return this.form.get('paths') as FormArray;
   }
 
-  addPath() {
+  addPath({hotkey = '', path = ''} = {hotkey: '', path: ''}) {
     this.paths.push(this.fb.group({
-      hotkeys: this.fb.control('', [Validators.required]),
-      path: this.fb.control('', [Validators.required])
+      hotkey: this.fb.control(hotkey, [Validators.required]),
+      path: this.fb.control(path)
     }))
   }
 }
