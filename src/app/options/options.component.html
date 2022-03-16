@@ -1,0 +1,24 @@
+<a mat-button href="obsidian://open" target="_blank">{{ "optionProtocolAlert" | i18n }}</a>
+<form [formGroup]="form" id="options">
+  <mat-form-field appearance="fill">
+    <mat-label>{{ "optionVault" | i18n }}</mat-label>
+    <input matInput formControlName="vault">
+    <mat-hint>{{ "optionVaultDescription" | i18n }}</mat-hint>
+  </mat-form-field>
+
+  <h2> {{ "optionShortcuts" | i18n }}</h2>
+  <div formArrayName="paths">
+    <h3> {{ "optionPaths" | i18n }}</h3>
+    <div *ngFor="let path of paths.controls; let i=index" [formGroupName]="i">
+      <mat-form-field appearance="fill">
+        <mat-label>{{ "optionHotkey" | i18n }}</mat-label>
+        <input matInput type="text" formControlName="hotkey">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>{{ "optionPath" | i18n }}</mat-label>
+        <input matInput type="text" formControlName="path">
+      </mat-form-field>
+    </div>
+    <button mat-stroked-button (click)="addPath()">+ {{ "optionAddPath" | i18n }}</button>
+  </div>
+</form>
