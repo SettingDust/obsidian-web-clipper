@@ -18,4 +18,5 @@ jobs:
           cache: 'yarn'
       - run: yarn
       - run: yarn build:angular
+      - run: yarn build:content
       - run: yarn lint
