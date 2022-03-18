@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import * as Eta from 'eta';
 import {URLPatternInit} from 'urlpattern-polyfill/src/url-pattern.interfaces';
-import {BrowserService} from './browser.service';
+import {BrowserService} from '../browser.service';
 import {filter, map} from 'rxjs/operators';
 
 @Injectable({

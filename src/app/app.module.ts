@@ -1,11 +1,12 @@
+import {NgDompurifySanitizer} from "@tinkoff/ng-dompurify";
+import {TUI_SANITIZER, TuiDialogModule, TuiNotificationsModule, TuiRootModule} from "@taiga-ui/core";
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {from} from 'rxjs';
-import {tap} from 'rxjs/operators';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {I18nPipe} from './i18n.pipe';
 
 @NgModule({
   declarations: [
@@ -13,21 +14,15 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
     BrowserAnimationsModule,
-    AppRoutingModule
+    TuiRootModule,
+    TuiDialogModule,
+    TuiNotificationsModule
   ],
-  providers: [],
+  providers: [{provide: TUI_SANITIZER, useClass: NgDompurifySanitizer}, I18nPipe],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-  constructor() {
-    from(browser.storage.local.get({vault: '', paths: []})).pipe(
-      tap(it => {
-        if (!it.paths.length) it.paths = [
-          {hotkey: 'r l', path: 'ReadLater'},
-          {hotkey: 'm o', path: 'Memo'}
-        ]
-      })
-    ).subscribe(it => browser.storage.local.set(it))
-  }
+export class AppModule{
+
 }

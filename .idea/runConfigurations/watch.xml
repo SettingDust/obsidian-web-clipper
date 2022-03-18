@@ -2,6 +2,7 @@
   <configuration default="false" name="watch" type="Multirun" separateTabs="false" reuseTabsWithFailures="false" startOneByOne="false" markFailedProcess="true" hideSuccessProcess="false" delayTime="0.0">
     <runConfiguration name="watch:package" type="npm" />
     <runConfiguration name="watch:angular" type="npm" />
+    <runConfiguration name="watch:content" type="npm" />
     <method v="2">
       <option name="NpmBeforeRunTask" enabled="true">
         <package-json value="$PROJECT_DIR$/package.json" />

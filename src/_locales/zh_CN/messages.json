@@ -1,40 +1,42 @@
 {
   "extensionName": {
-    "message": "Obsidian 网页剪藏",
-    "description": "Name of the extension."
+    "message": "Obsidian 网页剪藏"
   },
   "extensionDescription": {
-    "message": "剪藏页面内容为 Markdown 到 Obsidian",
-    "description": "Description of the extension."
+    "message": "剪藏页面内容为 Markdown 到 Obsidian"
   },
-  "optionVault": {
-    "message": "库",
-    "description": "The label of vault option"
+  "optionTabGeneral": {
+    "message": "通用"
   },
-  "optionVaultDescription": {
-    "message": "可选，如果留空就是当前或最后使用的库",
-    "description": "The description of vault option"
-  },
-  "optionShortcuts": {
+  "optionTabShortcuts": {
     "message": "快捷键"
   },
-  "optionPaths": {
-    "message": "全部路径",
-    "description": "The label of paths option"
+  "optionVault": {
+    "message": "库"
   },
-  "optionHotkey": {
-    "message": "热键",
-    "description": "The label of hotkey option"
+  "optionVaultDescription": {
+    "message": "可选，如果留空就是当前或最后使用的库"
   },
-  "optionPath": {
-    "message": "路径",
-    "description": "The label of path option"
+  "optionShortcut": {
+    "message": "快捷键"
   },
-  "optionAddPath": {
-    "message": "添加路径",
+  "optionAction": {
+    "message": "动作"
+  },
+  "optionAddShortcut": {
+    "message": "添加快捷键",
     "description": "Add a path"
   },
+  "optionProtocol": {
+    "message": "绑定 URL 协议"
+  },
   "optionProtocolAlert": {
-    "message": "点击绑定 URL Scheme 协议"
+    "message": "如果你不知道是什么，就点一下它"
+  },
+  "action-option": {
+    "message": "打开设置"
+  },
+  "action-export": {
+    "message": "导出到"
   }
 }

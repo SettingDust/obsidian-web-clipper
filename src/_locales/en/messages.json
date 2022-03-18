@@ -1,40 +1,44 @@
 {
   "extensionName": {
-    "message": "Obsidian Web Clipper",
-    "description": "Name of the extension."
+    "message": "Obsidian Web Clipper"
   },
   "extensionDescription": {
-    "message": "Export the page content to Obsidian as Markdown",
-    "description": "Description of the extension."
+    "message": "Export the page content to Obsidian as Markdown"
   },
-  "optionVault": {
-    "message": "Vault",
-    "description": "The label of vault option"
+  "optionTabGeneral": {
+    "message": "General"
   },
-  "optionVaultDescription": {
-    "message": "Optional, current/latest vault if empty",
-    "description": "The description of vault option"
-  },
-  "optionShortcuts": {
+  "optionTabShortcuts": {
     "message": "Shortcuts"
   },
+  "optionVault": {
+    "message": "Vault"
+  },
+  "optionVaultDescription": {
+    "message": "Optional, current/latest vault if empty"
+  },
   "optionPaths": {
-    "message": "Paths",
-    "description": "The label of paths option"
+    "message": "Paths"
   },
-  "optionHotkey": {
-    "message": "Hotkey",
-    "description": "The label of hotkey option"
+  "optionShortcut": {
+    "message": "Shortcut"
   },
-  "optionPath": {
-    "message": "Path",
-    "description": "The label of path option"
+  "optionAction": {
+    "message": "Action"
   },
-  "optionAddPath": {
-    "message": "Add path",
-    "description": "Add a path"
+  "optionAddShortcut": {
+    "message": "Add shortcut"
+  },
+  "optionProtocol": {
+    "message": "Bind url protocol"
   },
   "optionProtocolAlert": {
-    "message": "Click to bind url scheme protocol"
+    "message": "Required for addon to work. If you don't know what is it. Click now."
+  },
+  "action-option": {
+    "message": "Open Options"
+  },
+  "action-export": {
+    "message": "Export to"
   }
 }

@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {BrowserService} from "./browser.service";
+import {BrowserService} from "../browser.service";
 import {ObsidianService} from "./obsidian.service";
 import {catchError, combineLatestWith, throwError} from "rxjs";
 import {filter, map, switchMap} from "rxjs/operators";
@@ -49,5 +49,10 @@ export class BackgroundComponent {
         )
       )
     ).subscribe()
+
+    browserService.message.actionListener('option').subscribe(() => browser.tabs.create({
+      url: browser.runtime.getURL('index.html?#/options/(options:general)'),
+      active: true
+    }))
   }
 }

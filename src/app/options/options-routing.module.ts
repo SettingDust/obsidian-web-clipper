@@ -1,9 +1,13 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {OptionsComponent} from "./options.component";
+import {ShortcutsComponent} from './shortcuts/shortcuts.component';
+import {GeneralComponent} from './general/general.component';
+import {OptionsComponent} from './options.component';
 
 const routes: Routes = [
-  {path: '', component: OptionsComponent}
+  {path: '', component: OptionsComponent},
+  {path: 'general', component: GeneralComponent, outlet: 'options'},
+  {path: 'shortcuts', component: ShortcutsComponent, outlet: 'options'}
 ];
 
 @NgModule({
