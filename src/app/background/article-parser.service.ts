@@ -45,7 +45,7 @@ export class ArticleParserService {
               switchMap(value =>
                 of(resolveUrl({relative: value, base: baseUrl})).pipe(
                   tap(absoluteUrl => element.setAttribute(attr, absoluteUrl)),
-                  mapTo(document)
+                  map(() => document)
                 )
               )
             )
