@@ -3484,20 +3484,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"article-parser@npm:^6.0.0-rc8":
-  version: 6.0.0-rc8
-  resolution: "article-parser@npm:6.0.0-rc8"
+"article-parser@npm:^6.0.0-rc9":
+  version: 6.0.0-rc9
+  resolution: "article-parser@npm:6.0.0-rc9"
   dependencies:
     "@mozilla/readability": ^0.4.2
     axios: ^0.26.1
     bellajs: ^11.0.2
-    debug: ^4.3.3
+    debug: ^4.3.4
     html-crush: ^5.0.12
     linkedom: ^0.14.4
     sanitize-html: ^2.7.0
     string-comparison: ^1.1.0
     urlpattern-polyfill: ^1.0.0-rc5
-  checksum: 97475fea9083481c978da85ef2b6d23708f64831be15ff27437c824daa3fd946e43df3c6ebd0ab4314abe89f6aaee6c9f413c3038c52d33980f819c150648b2b
+  checksum: ba255476586bfaed0cf53ff80e062cfc79d6ddb35945b3dd7355fced537277a5e7b4b75ed9f403668c33f9e311bd1eb6e4583664bd4e8e4337fd62373ef48c66
   languageName: node
   linkType: hard
 
@@ -4844,7 +4844,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"debug@npm:4, debug@npm:4.3.3, debug@npm:^4.1.0, debug@npm:^4.1.1, debug@npm:^4.3.1, debug@npm:^4.3.2, debug@npm:^4.3.3":
+"debug@npm:4, debug@npm:4.3.3, debug@npm:^4.1.0, debug@npm:^4.1.1, debug@npm:^4.3.1, debug@npm:^4.3.2":
   version: 4.3.3
   resolution: "debug@npm:4.3.3"
   dependencies:
@@ -4862,6 +4862,18 @@ __metadata:
   dependencies:
     ms: ^2.1.1
   checksum: b3d8c5940799914d30314b7c3304a43305fd0715581a919dacb8b3176d024a782062368405b47491516d2091d6462d4d11f2f4974a405048094f8bfebfa3071c
+  languageName: node
+  linkType: hard
+
+"debug@npm:^4.3.4":
+  version: 4.3.4
+  resolution: "debug@npm:4.3.4"
+  dependencies:
+    ms: 2.1.2
+  peerDependenciesMeta:
+    supports-color:
+      optional: true
+  checksum: 3dbad3f94ea64f34431a9cbf0bafb61853eda57bff2880036153438f50fb5a84f27683ba0d8e5426bf41a8c6ff03879488120cf5b3a761e77953169c0600a708
   languageName: node
   linkType: hard
 
@@ -9801,7 +9813,7 @@ __metadata:
     "@types/sanitize-html": ^2.6.2
     "@types/turndown": ^5.0.1
     "@webcomponents/custom-elements": ^1.5.0
-    article-parser: ^6.0.0-rc8
+    article-parser: ^6.0.0-rc9
     dompurify: 2.2.9
     eta: ^1.12.3
     filenamify: 5.1.0

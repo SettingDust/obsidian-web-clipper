@@ -4,9 +4,9 @@ import {CommonModule} from '@angular/common';
 import {OptionsRoutingModule} from './options-routing.module';
 import {OptionsComponent} from './options.component';
 import {ReactiveFormsModule} from "@angular/forms";
-import {I18nPipe} from "../i18n.pipe";
 import {
-  TuiButtonModule, TuiDataListModule,
+  TuiButtonModule,
+  TuiDataListModule,
   TuiHintControllerModule,
   TuiHintModule,
   TuiLinkModule,
@@ -17,12 +17,12 @@ import {TuiDataListWrapperModule, TuiInputModule, TuiSelectModule, TuiTabsModule
 import {TuiTableModule} from '@taiga-ui/addon-table';
 import {ShortcutsComponent} from './shortcuts/shortcuts.component';
 import {GeneralComponent} from './general/general.component';
+import {SharedModule} from '../shared.module';
 
 
 @NgModule({
   declarations: [
     OptionsComponent,
-    I18nPipe,
     ShortcutsComponent,
     GeneralComponent
   ],
@@ -42,6 +42,7 @@ import {GeneralComponent} from './general/general.component';
     TuiDataListWrapperModule,
     TuiDataListModule,
     TuiSelectModule,
+    SharedModule
   ]
 })
 export class OptionsModule {

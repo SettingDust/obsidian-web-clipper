@@ -1,15 +1,19 @@
 <div class="tui-container tui-container_adaptive">
   <tui-tabs>
     <a tuiTab routerLinkActive [routerLink]="[{outlets:{options:['general']}}]">
-      <tui-svg src="tuiIconSettings" class="tui-space_right-2"></tui-svg>
+      <tui-svg src="tuiIconSettingsLarge" class="tui-space_right-2"></tui-svg>
       {{ "optionTabGeneral" | i18n }}
     </a>
     <a tuiTab routerLinkActive [routerLink]="[{outlets:{options:['shortcuts']}}]">
-      <tui-svg src="tuiIconExternal" class="tui-space_right-2"></tui-svg>
+      <tui-svg src="tuiIconStructureLarge" class="tui-space_right-2"></tui-svg>
       {{ "optionTabShortcuts" | i18n }}
     </a>
+    <a tuiTab routerLinkActive [routerLink]="[{outlets:{options:['rules']}}]">
+      <tui-svg src="tuiIconTableSplitLarge" class="tui-space_right-2"></tui-svg>
+      {{ "optionTabRules" | i18n }}
+    </a>
     <a tuiTab href="obsidian://open" target="_blank" tuiHint="{{ 'optionProtocolAlert' | i18n }}">
-      <tui-svg src="tuiIconLink" class="tui-space_right-2"></tui-svg>
+      <tui-svg src="tuiIconLinkLarge" class="tui-space_right-2"></tui-svg>
       {{ "optionProtocol" | i18n }}
     </a>
   </tui-tabs>

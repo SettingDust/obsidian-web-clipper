@@ -11,6 +11,9 @@
   "optionTabShortcuts": {
     "message": "Shortcuts"
   },
+  "optionTabRules": {
+    "message": "Rules"
+  },
   "optionVault": {
     "message": "Vault"
   },
@@ -29,6 +32,12 @@
   "optionAddShortcut": {
     "message": "Add shortcut"
   },
+  "optionShortcutMemo": {
+    "message": "Memo"
+  },
+  "optionShortcutReadLater": {
+    "message": "ReadLater"
+  },
   "optionProtocol": {
     "message": "Bind url protocol"
   },
@@ -40,5 +49,32 @@
   },
   "action-export": {
     "message": "Export to"
+  },
+  "optionRuleAdd": {
+    "message": "Add rule"
+  },
+  "optionRulePatterns": {
+    "message": "Patterns"
+  },
+  "optionRuleAddPattern": {
+    "message": "Add pattern"
+  },
+  "optionRuleSelector": {
+    "message": "Selector"
+  },
+  "optionRuleSelectorDescription": {
+    "message": "Css selector include the entire article"
+  },
+  "optionRuleIgnored": {
+    "message": "Ignored"
+  },
+  "optionRuleIgnoredDescription": {
+    "message": "Css selector for ignoring"
+  },
+  "optionRuleAddIgnored": {
+    "message": "Add ignored"
+  },
+  "optionRuleNotification": {
+    "message": "Higher priority for higher(newer) rules"
   }
 }

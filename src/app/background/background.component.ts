@@ -19,6 +19,7 @@ export class BackgroundComponent {
     markdownService: MarkdownService,
     articleParserService: ArticleParserService
   ) {
+
     browserService.message.actionListener('export').pipe(
       switchMap(({message: {document, url, selection, path = ''}, sender}) =>
         articleParserService.extract({document, url, selection}).pipe(
@@ -51,7 +52,7 @@ export class BackgroundComponent {
     ).subscribe()
 
     browserService.message.actionListener('option').subscribe(() => browser.tabs.create({
-      url: browser.runtime.getURL('index.html?#/options/(options:general)'),
+      url: browser.runtime.getURL('index.html?#/options/(options:rules)'),
       active: true
     }))
   }

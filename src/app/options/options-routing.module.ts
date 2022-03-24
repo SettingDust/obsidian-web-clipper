@@ -7,7 +7,8 @@ import {OptionsComponent} from './options.component';
 const routes: Routes = [
   {path: '', component: OptionsComponent},
   {path: 'general', component: GeneralComponent, outlet: 'options'},
-  {path: 'shortcuts', component: ShortcutsComponent, outlet: 'options'}
+  {path: 'shortcuts', component: ShortcutsComponent, outlet: 'options'},
+  {path: 'rules', loadChildren: () => import('./rules/rules.module').then(m => m.RulesModule), outlet: 'options'}
 ];
 
 @NgModule({

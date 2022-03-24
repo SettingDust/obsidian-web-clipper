@@ -11,6 +11,9 @@
   "optionTabShortcuts": {
     "message": "快捷键"
   },
+  "optionTabRules": {
+    "message": "规则"
+  },
   "optionVault": {
     "message": "库"
   },
@@ -27,6 +30,12 @@
     "message": "添加快捷键",
     "description": "Add a path"
   },
+  "optionShortcutMemo": {
+    "message": "备忘录"
+  },
+  "optionShortcutReadLater": {
+    "message": "稍后读"
+  },
   "optionProtocol": {
     "message": "绑定 URL 协议"
   },
@@ -38,5 +47,32 @@
   },
   "action-export": {
     "message": "导出到"
+  },
+  "optionRuleAdd": {
+    "message": "添加规则"
+  },
+  "optionRulePatterns": {
+    "message": "匹配模式"
+  },
+  "optionRuleAddPattern": {
+    "message": "添加匹配"
+  },
+  "optionRuleSelector": {
+    "message": "选择器"
+  },
+  "optionRuleSelectorDescription": {
+    "message": "包含全部文章内容的 CSS 选择器"
+  },
+  "optionRuleIgnored": {
+    "message": "忽略"
+  },
+  "optionRuleIgnoredDescription": {
+    "message": "忽略的 CSS 选择器"
+  },
+  "optionRuleAddIgnored": {
+    "message": "添加忽略"
+  },
+  "optionRuleNotification": {
+    "message": "靠上（更新）的规则优先级更高"
   }
 }

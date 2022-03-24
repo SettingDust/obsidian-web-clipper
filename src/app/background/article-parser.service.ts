@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
-import {ArticleData, extract} from 'article-parser';
-import {combineLatest, combineLatestWith, defaultIfEmpty, from, mapTo, Observable, of, switchMap, tap} from 'rxjs';
+import {ArticleData, extract, setQueryRules} from 'article-parser';
+import {combineLatest, combineLatestWith, defaultIfEmpty, from, Observable, of, switchMap, tap} from 'rxjs';
 import {filter, map} from 'rxjs/operators';
 import resolveUrl from '@availity/resolve-url';
+import {Rule} from '../rule.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,8 @@ export class ArticleParserService {
 
   constructor() {
   }
+
+  rules = (rules: Rule[]) => setQueryRules(rules)
 
   extract = ({url, document, selection}: ExportData): Observable<ArticleData> => combineLatest([
     of(selection).pipe(
@@ -22,7 +25,7 @@ export class ArticleParserService {
     extract(document)
   ]).pipe(switchMap(([selection, articleData]) => of(selection).pipe(
     tap((selection) => articleData.content = selection?.documentElement?.outerHTML ?? articleData?.content),
-    mapTo(articleData)
+    map(() => articleData)
   )))
 
 

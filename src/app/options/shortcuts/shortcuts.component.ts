@@ -2,7 +2,6 @@ import {Component, ViewEncapsulation} from '@angular/core';
 import {AbstractControl, FormArray, FormBuilder, Validators} from '@angular/forms';
 import {concat, from, of} from 'rxjs';
 import {map, switchMap, tap} from 'rxjs/operators';
-import {I18nPipe} from '../../i18n.pipe';
 
 @Component({
   selector: 'app-shortcuts',
@@ -20,10 +19,10 @@ export class ShortcutsComponent {
   constructor(private fb: FormBuilder) {
     from(browser.storage.local.get('shortcuts')).pipe(
       map(it => it.shortcuts as [{ shortcut: string, action: string } & any]),
+      tap(it => this.form.setControl('shortcuts', this.fb.array(it.map(data => this.fb.group(data))))),
       switchMap(it => from(it).pipe(
         tap((data) => {
           if (!this.actions.includes(data.action)) this.actions.push(data.action)
-          this.addShortcut(data)
         }),
       )),
       switchMap(() => this.form.valueChanges.pipe(
@@ -38,13 +37,14 @@ export class ShortcutsComponent {
   }
 
   addShortcut(data: { shortcut: string, action: string } & any = {shortcut: '', action: 'option'}) {
-    const controls = Object.entries(data).reduce((prev, [key, value]) => {
-      prev[key] = this.fb.control(value)
-      if (!this.required.includes(key)) prev[key].setValidators(Validators.required)
-      return prev
-    }, {} as { [key: string]: AbstractControl })
-    this.shortcuts.push(this.fb.group(controls))
+    this.shortcuts.push(this.fb.group(this.shortcutToForm(data)))
   }
+
+  shortcutToForm = (data: { shortcut: string, action: string } & any) => Object.entries(data).reduce((prev, [key, value]) => {
+    prev[key] = this.fb.control(value)
+    if (this.required.includes(key)) prev[key].setValidators(Validators.required)
+    return prev
+  }, {} as { [key: string]: AbstractControl })
 
   $shortcutChange = (shortcut: AbstractControl) => concat(
     of(shortcut.get('action')?.value),
