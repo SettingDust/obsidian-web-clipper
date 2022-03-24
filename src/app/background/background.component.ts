@@ -1,11 +1,12 @@
 import {Component} from '@angular/core';
 import {BrowserService} from "../browser.service";
 import {ObsidianService} from "./obsidian.service";
-import {catchError, combineLatestWith, throwError} from "rxjs";
+import {catchError, combineLatestWith, from, throwError} from "rxjs";
 import {filter, map, switchMap} from "rxjs/operators";
 import {MarkdownService} from "./markdown.service";
 import filenamify from "filenamify";
-import {ArticleParserService} from './article-parser.service';
+import {ArticleParserService} from '../article-parser.service';
+import {I18nPipe} from '../i18n.pipe';
 
 @Component({
   selector: 'app-background',
@@ -17,8 +18,39 @@ export class BackgroundComponent {
     browserService: BrowserService,
     obsidianService: ObsidianService,
     markdownService: MarkdownService,
-    articleParserService: ArticleParserService
+    articleParserService: ArticleParserService,
+    i18n: I18nPipe
   ) {
+    // TODO Action types
+    from(browser.storage.local.get({
+      vault: '',
+      shortcuts: [
+        {
+          shortcut: 'o p',
+          action: 'option'
+        },
+        {
+          shortcut: 'r l',
+          action: 'export',
+          path: i18n.transform('optionShortcutReadLater')
+        },
+        {
+          shortcut: 'm o',
+          action: 'export',
+          path: i18n.transform('optionShortcutMemo')
+        }
+      ],
+      rules: [
+        {
+          patterns: ['*://foo.bar/*', '*://exam.ple/*'],
+          selector: '#Article',
+          unwanted: ['.foo', '.bar']
+        }
+      ]
+    })).subscribe(it => {
+      articleParserService.rules(it.rules)
+      browser.storage.local.set(it).then()
+    })
 
     browserService.message.actionListener('export').pipe(
       switchMap(({message: {document, url, selection, path = ''}, sender}) =>

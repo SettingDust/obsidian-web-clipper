@@ -8,7 +8,7 @@
     "lint": "cd ./dist && web-ext lint",
     "lint:dev": "npm-run-all build:dev lint",
     "build": "npm-run-all build:content build:angular lint package",
-    "build:angular": "ng build --extra-webpack-config webpack.externals.cjs",
+    "build:angular": "ng build --stats-json --extra-webpack-config webpack.externals.cjs",
     "build:content": "npx esbuild src/content-scripts/index.ts --outfile=dist/content-script.js --bundle --format=esm --minify --sourcemap --target=firefox57",
     "package": "cd ./dist && web-ext build",
     "build:dev": "ng build --configuration development --extra-webpack-config webpack.externals.cjs",
@@ -16,6 +16,7 @@
     "watch:angular": "ng build --stats-json --extra-webpack-config webpack.externals.cjs --watch --configuration development",
     "watch:content": "npx esbuild src/content-scripts/index.ts --outfile=dist/content-script.js --watch --bundle --format=esm --sourcemap --target=firefox57",
     "watch:package": "cd ./dist && web-ext run --verbose",
+    "analyze": "webpack-bundle-analyzer dist/stats.json",
     "postinstall": "ngcc",
     "postinstall:bak": "ngcc"
   },

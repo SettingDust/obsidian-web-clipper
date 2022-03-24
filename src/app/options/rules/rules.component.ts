@@ -5,7 +5,7 @@ import {AbstractControl, FormArray, FormBuilder} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {map, switchMap, tap} from 'rxjs/operators';
 import {Rule} from 'src/app/rule.service';
-import {ArticleParserService} from '../../background/article-parser.service';
+import {ArticleParserService} from '../../article-parser.service';
 
 @Component({
   selector: 'app-rules',

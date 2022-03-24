@@ -3,7 +3,7 @@ import {ArticleData, extract, setQueryRules} from 'article-parser';
 import {combineLatest, combineLatestWith, defaultIfEmpty, from, Observable, of, switchMap, tap} from 'rxjs';
 import {filter, map} from 'rxjs/operators';
 import resolveUrl from '@availity/resolve-url';
-import {Rule} from '../rule.service';
+import {Rule} from './rule.service';
 
 @Injectable({
   providedIn: 'root'
