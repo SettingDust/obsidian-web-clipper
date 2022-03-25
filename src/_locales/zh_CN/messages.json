@@ -74,5 +74,8 @@
   },
   "optionRuleNotification": {
     "message": "靠上（更新）的规则优先级更高"
+  },
+  "optionRuleTemplate": {
+    "message": "模板"
   }
 }

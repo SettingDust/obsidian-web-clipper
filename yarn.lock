@@ -9820,6 +9820,7 @@ __metadata:
     hotkeys-js: ^3.8.7
     ngx-build-plus: 13.0.1
     npm-run-all: ^4.1.5
+    prettier: ^2.6.1
     rxjs: ~7.5.5
     tinykeys: ^1.4.0
     tslib: ^2.3.1
@@ -10848,6 +10849,15 @@ __metadata:
   version: 2.0.0
   resolution: "prepend-http@npm:2.0.0"
   checksum: 7694a9525405447662c1ffd352fcb41b6410c705b739b6f4e3a3e21cf5fdede8377890088e8934436b8b17ba55365a615f153960f30877bf0d0392f9e93503ea
+  languageName: node
+  linkType: hard
+
+"prettier@npm:^2.6.1":
+  version: 2.6.1
+  resolution: "prettier@npm:2.6.1"
+  bin:
+    prettier: bin-prettier.js
+  checksum: 78be1f8a3ddfad7c3d8a854b6c8941a3bb1ddfca4225c38d778e0fe1029a55368f71b3bbefff82c689015fbb4d391ec44add957f01308ad2725e01a7c1f37cb6
   languageName: node
   linkType: hard
 

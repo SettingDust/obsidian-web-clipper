@@ -1,9 +1,11 @@
-import {ActionData} from "../action"
+import { ActionData } from '../action'
 
-export type ExportBackgroundAction = ActionData<undefined, {
-  document: string
-  url: string
-  selection?: string,
-  path: string
-}>
-
+export type ExportBackgroundAction = ActionData<
+  undefined,
+  {
+    document: string
+    url: string
+    selection?: string
+    path: string
+  }
+>

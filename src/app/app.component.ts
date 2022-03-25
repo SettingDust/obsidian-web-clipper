@@ -1,6 +1,6 @@
-import {Component} from '@angular/core';
-import {Title} from '@angular/platform-browser';
-import {I18nPipe} from './i18n.pipe';
+import { Component } from '@angular/core'
+import { Title } from '@angular/platform-browser'
+import { I18nPipe } from './i18n.pipe'
 
 @Component({
   selector: 'app-root',

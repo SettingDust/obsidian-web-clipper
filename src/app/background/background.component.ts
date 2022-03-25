@@ -1,12 +1,13 @@
-import {Component} from '@angular/core';
-import {BrowserService} from "../browser.service";
-import {ObsidianService} from "./obsidian.service";
-import {catchError, combineLatestWith, from, throwError} from "rxjs";
-import {filter, map, switchMap} from "rxjs/operators";
-import {MarkdownService} from "./markdown.service";
-import filenamify from "filenamify";
-import {ArticleParserService} from '../article-parser.service';
-import {I18nPipe} from '../i18n.pipe';
+import { Component } from '@angular/core'
+import { BrowserService } from '../browser.service'
+import { ObsidianService } from './obsidian.service'
+import { catchError, combineLatestWith, from, throwError } from 'rxjs'
+import { filter, map, switchMap } from 'rxjs/operators'
+import { MarkdownService } from './markdown.service'
+import filenamify from 'filenamify'
+import { ArticleParserService } from '../article-parser.service'
+import { I18nPipe } from '../i18n.pipe'
+import { ExportTemplateService } from './export-template.service'
 
 @Component({
   selector: 'app-background',
@@ -19,73 +20,89 @@ export class BackgroundComponent {
     obsidianService: ObsidianService,
     markdownService: MarkdownService,
     articleParserService: ArticleParserService,
+    templateService: ExportTemplateService,
     i18n: I18nPipe
   ) {
     // TODO Action types
-    from(browser.storage.local.get({
-      vault: '',
-      shortcuts: [
-        {
-          shortcut: 'o p',
-          action: 'option'
-        },
-        {
-          shortcut: 'r l',
-          action: 'export',
-          path: i18n.transform('optionShortcutReadLater')
-        },
-        {
-          shortcut: 'm o',
-          action: 'export',
-          path: i18n.transform('optionShortcutMemo')
-        }
-      ],
-      rules: [
-        {
-          patterns: ['*://foo.bar/*', '*://exam.ple/*'],
-          selector: '#Article',
-          unwanted: ['.foo', '.bar']
-        }
-      ]
-    })).subscribe(it => {
+    from(
+      browser.storage.local.get({
+        vault: '',
+        shortcuts: [
+          {
+            shortcut: 'o p',
+            action: 'option'
+          },
+          {
+            shortcut: 'r l',
+            action: 'export',
+            path: i18n.transform('optionShortcutReadLater')
+          },
+          {
+            shortcut: 'm o',
+            action: 'export',
+            path: i18n.transform('optionShortcutMemo')
+          }
+        ],
+        rules: [
+          {
+            patterns: ['*://foo.bar/*', '*://exam.ple/*'],
+            selector: '#Article',
+            unwanted: ['.foo', '.bar']
+          }
+        ]
+      })
+    ).subscribe((it) => {
       articleParserService.rules(it.rules)
       browser.storage.local.set(it).then()
     })
 
-    browserService.message.actionListener('export').pipe(
-      switchMap(({message: {document, url, selection, path = ''}, sender}) =>
-        articleParserService.extract({document, url, selection}).pipe(
-          map(({title, content}) => ({
-            title: title ?? '',
-            content: markdownService.convert(selection ?? content ?? ''),
-            path
-          })),
-          combineLatestWith(browser.storage.local.get('vault')),
-          map(([{title, content, path}, {vault}]) => ({
-            name: `${path}/${filenamify(title)}`,
-            content,
-            vault: vault ?? ''
-          })),
-          switchMap((data) => obsidianService.api('new', data).pipe(
-            map(url => obsidianService.plusToSpace(url.toString())),
-          )),
-          switchMap(url => browserService.tab.create({url}).pipe(
-            map(({id}) => id),
-            filter((id): id is number => !!id),
-            switchMap(id => browserService.tab.warmup(id)),
-            switchMap(id => browser.tabs.remove(id))
-          )),
-          catchError((err) => {
-            browserService.message.action(sender.tab!.id!, 'error', Object.create(err))
-            return throwError(() => err)
-          })
+    browserService.message
+      .actionListener('export')
+      .pipe(
+        switchMap(({ message: { document, url: rawUrl, selection, path = '' }, sender }) =>
+          articleParserService.extract({ document, url: rawUrl, selection }).pipe(
+            map(({ title, content, url }) => ({
+              title: title ?? '',
+              content: markdownService.convert(selection ?? content ?? ''),
+              path,
+              url: url ?? rawUrl
+            })),
+            map(({ title, content, path, url }) => ({
+              title,
+              path,
+              content: templateService.render(content, { title, url, content })
+            })),
+            combineLatestWith(browser.storage.local.get('vault')),
+            map(([{ title, content, path }, { vault }]) => ({
+              name: `${path}/${filenamify(title)}`,
+              content,
+              vault: vault ?? ''
+            })),
+            switchMap((data) =>
+              obsidianService.api('new', data).pipe(map((url) => obsidianService.plusToSpace(url.toString())))
+            ),
+            switchMap((url) =>
+              browserService.tab.create({ url }).pipe(
+                map(({ id }) => id),
+                filter((id): id is number => !!id),
+                switchMap((id) => browserService.tab.warmup(id)),
+                switchMap((id) => browser.tabs.remove(id))
+              )
+            ),
+            catchError((err) => {
+              browserService.message.action(sender.tab!.id!, 'error', Object.create(err))
+              return throwError(() => err)
+            })
+          )
         )
       )
-    ).subscribe()
+      .subscribe()
 
-    browserService.message.actionListener('option').subscribe(() => browser.tabs.create({
-      url: browser.runtime.getURL('index.html?#/options/(options:rules)'),
-      active: true
-    }))
+    browserService.message.actionListener('option').subscribe(() =>
+      browser.tabs.create({
+        url: browser.runtime.getURL('index.html?#/options/(options:rules)'),
+        active: true
+      })
+    )
   }
 }

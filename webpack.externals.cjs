@@ -1,10 +1,19 @@
-const {Configuration} = require("webpack");
+const { Configuration } = require('webpack')
 
 /**
  * @type {Configuration}
  */
 module.exports = {
+  module: {
+    rules: [{ test: /\.eta$/, type: 'asset/source' }]
+  },
   externals: {
-    "node:path": {}
+    'node:path': {}
+  },
+  resolve: {
+    fallback: {
+      path: false,
+      fs: false
+    }
   }
 }

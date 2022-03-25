@@ -1,5 +1,5 @@
 export interface ActionData<T, U> {
-  receive?: T,
+  receive?: T
   send?: U
 }
 

@@ -76,5 +76,8 @@
   },
   "optionRuleNotification": {
     "message": "Higher priority for higher(newer) rules"
+  },
+  "optionRuleTemplate": {
+    "message": "Template"
   }
 }

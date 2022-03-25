@@ -1,9 +1,9 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import { NgModule } from '@angular/core'
+import { CommonModule } from '@angular/common'
 
-import {OptionsRoutingModule} from './options-routing.module';
-import {OptionsComponent} from './options.component';
-import {ReactiveFormsModule} from "@angular/forms";
+import { OptionsRoutingModule } from './options-routing.module'
+import { OptionsComponent } from './options.component'
+import { ReactiveFormsModule } from '@angular/forms'
 import {
   TuiButtonModule,
   TuiDataListModule,
@@ -12,20 +12,15 @@ import {
   TuiLinkModule,
   TuiSvgModule,
   TuiTextfieldControllerModule
-} from '@taiga-ui/core';
-import {TuiDataListWrapperModule, TuiInputModule, TuiSelectModule, TuiTabsModule} from '@taiga-ui/kit';
-import {TuiTableModule} from '@taiga-ui/addon-table';
-import {ShortcutsComponent} from './shortcuts/shortcuts.component';
-import {GeneralComponent} from './general/general.component';
-import {SharedModule} from '../shared.module';
-
+} from '@taiga-ui/core'
+import { TuiDataListWrapperModule, TuiInputModule, TuiSelectModule, TuiTabsModule } from '@taiga-ui/kit'
+import { TuiTableModule } from '@taiga-ui/addon-table'
+import { ShortcutsComponent } from './shortcuts/shortcuts.component'
+import { GeneralComponent } from './general/general.component'
+import { SharedModule } from '../shared.module'
 
 @NgModule({
-  declarations: [
-    OptionsComponent,
-    ShortcutsComponent,
-    GeneralComponent
-  ],
+  declarations: [OptionsComponent, ShortcutsComponent, GeneralComponent],
   imports: [
     CommonModule,
     OptionsRoutingModule,
@@ -45,5 +40,4 @@ import {SharedModule} from '../shared.module';
     SharedModule
   ]
 })
-export class OptionsModule {
-}
+export class OptionsModule {}

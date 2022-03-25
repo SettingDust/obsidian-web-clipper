@@ -1,41 +1,35 @@
 <form [formGroup]="form" id="options" class="tui-container tui-container_adaptive tui-space_top-4">
-  <table tuiTable size="m" [columns]="['shortcut','action']">
+  <table tuiTable size="m" [columns]="['shortcut', 'action']">
     <thead>
-    <tr tuiThGroup>
-      <th class="tui-table__th" *tuiHead="'shortcut'" [sorter]="null" tuiTh>{{ "optionShortcut" | i18n }}</th>
-      <th class="tui-table__th" *tuiHead="'action'" [sorter]="null" tuiTh>{{ "optionAction" | i18n }}</th>
-    </tr>
+      <tr tuiThGroup>
+        <th class="tui-table__th" *tuiHead="'shortcut'" [sorter]="null" tuiTh>{{ 'optionShortcut' | i18n }}</th>
+        <th class="tui-table__th" *tuiHead="'action'" [sorter]="null" tuiTh>{{ 'optionAction' | i18n }}</th>
+      </tr>
     </thead>
     <tbody tuiTbody formArrayName="shortcuts">
-    <tr class="tui-table__tr" tuiTr *ngFor="let shortcut of shortcuts.controls; let i=index" [formGroupName]="i">
-      <td *tuiCell="'shortcut'" tuiTd>
-        <tui-input formControlName="shortcut"></tui-input>
-      </td>
-      <td *tuiCell="'action'" tuiTd class="action-column">
-        <tui-select formControlName="action" [valueContent]="actionContent" [tuiTextfieldLabelOutside]="true">
-          <tui-data-list-wrapper *tuiDataList [items]="actions" [itemContent]="actionContent"></tui-data-list-wrapper>
-        </tui-select>
-        <tui-input
-          formControlName="path"
-          *ngIf="($shortcutChange(shortcut) | async) === 'export'"
-        ></tui-input>
-      </td>
-    </tr>
+      <tr class="tui-table__tr" tuiTr *ngFor="let shortcut of shortcuts.controls; let i = index" [formGroupName]="i">
+        <td *tuiCell="'shortcut'" tuiTd>
+          <tui-input formControlName="shortcut"></tui-input>
+        </td>
+        <td *tuiCell="'action'" tuiTd class="action-column">
+          <tui-select formControlName="action" [valueContent]="actionContent" [tuiTextfieldLabelOutside]="true">
+            <tui-data-list-wrapper *tuiDataList [items]="actions" [itemContent]="actionContent"></tui-data-list-wrapper>
+          </tui-select>
+          <tui-input formControlName="path" *ngIf="($shortcutChange(shortcut) | async) === 'export'"></tui-input>
+        </td>
+      </tr>
     </tbody>
     <tfoot>
-    <tr>
-      <td [colSpan]="2">
-        <button
-          tuiButton
-          class="tui-space_top-2"
-          icon="tuiIconPlus"
-          (click)="addShortcut()"
-        >{{ "optionAddShortcut" | i18n }}</button>
-      </td>
-    </tr>
+      <tr>
+        <td [colSpan]="2">
+          <button tuiButton class="tui-space_top-2" icon="tuiIconPlus" (click)="addShortcut()">
+            {{ 'optionAddShortcut' | i18n }}
+          </button>
+        </td>
+      </tr>
     </tfoot>
   </table>
   <ng-template #actionContent let-action>
-    {{ "action-" + action | i18n }}
+    {{ 'action-' + action | i18n }}
   </ng-template>
 </form>

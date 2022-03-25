@@ -1,15 +1,15 @@
-import {Injectable} from '@angular/core';
-import {of, tap} from 'rxjs';
+import { Injectable } from '@angular/core'
+import { of, tap } from 'rxjs'
 
 @Injectable({
   providedIn: 'root'
 })
 export class ObsidianService {
-  private BASE_URL = "obsidian://"
+  private BASE_URL = 'obsidian://'
 
   api = <Action extends keyof Actions>(action: Action, data: Actions[Action]) =>
     of(new URL(`${this.BASE_URL}${action}`)).pipe(
-      tap(({searchParams}) => Object.entries(data).forEach(([key, value]) => searchParams.append(key, String(value))))
+      tap(({ searchParams }) => Object.entries(data).forEach(([key, value]) => searchParams.append(key, String(value))))
     )
 
   plusToSpace = (url: string) => url.replace(/\+/g, '%20')
