@@ -51,10 +51,7 @@ export class BackgroundComponent {
           }
         ]
       })
-    ).subscribe((it) => {
-      articleParserService.rules(it.rules)
-      browser.storage.local.set(it).then()
-    })
+    ).subscribe((it) => browser.storage.local.set(it).then())
 
     browserService.message
       .actionListener('export')
@@ -67,11 +64,13 @@ export class BackgroundComponent {
               path,
               url: url ?? rawUrl
             })),
-            map(({ title, content, path, url }) => ({
-              title,
-              path,
-              content: templateService.render(content, { title, url, content })
-            })),
+            switchMap(({ title, content, path, url }) => templateService.get(url).pipe(
+              map((template) => ({
+                title,
+                path,
+                content: templateService.render(template, { title, url, content })
+              }))
+            )),
             combineLatestWith(browser.storage.local.get('vault')),
             map(([{ title, content, path }, { vault }]) => ({
               name: `${path}/${filenamify(title)}`,

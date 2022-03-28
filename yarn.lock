@@ -6048,13 +6048,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eta@npm:^1.12.3":
-  version: 1.12.3
-  resolution: "eta@npm:1.12.3"
-  checksum: 390c1cd320755cb98fd5a4a911539e8ed498fc49b82414f0023033ff606d80a34e6df0aeeb9fb0b519b318a750e6d17a72fc25f8a8c686cfc52d638e998237a1
-  languageName: node
-  linkType: hard
-
 "etag@npm:~1.8.1":
   version: 1.8.1
   resolution: "etag@npm:1.8.1"
@@ -8965,6 +8958,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"micromustache@npm:^8.0.3":
+  version: 8.0.3
+  resolution: "micromustache@npm:8.0.3"
+  checksum: a0fe463e2d19b1d4c92f15643bbdb8359c40184110ffcb757c13101cad223d551f73776ee4c9c7a5424094a9012ad853c5181546e22b69e1d68454814a305cd8
+  languageName: node
+  linkType: hard
+
 "mime-db@npm:1.51.0, mime-db@npm:>= 1.43.0 < 2":
   version: 1.51.0
   resolution: "mime-db@npm:1.51.0"
@@ -9815,9 +9815,9 @@ __metadata:
     "@webcomponents/custom-elements": ^1.5.0
     article-parser: ^6.0.0-rc9
     dompurify: 2.2.9
-    eta: ^1.12.3
     filenamify: 5.1.0
     hotkeys-js: ^3.8.7
+    micromustache: ^8.0.3
     ngx-build-plus: 13.0.1
     npm-run-all: ^4.1.5
     prettier: ^2.6.1

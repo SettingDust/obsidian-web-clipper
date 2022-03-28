@@ -1,12 +1,11 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core'
-import { concat, from, pluck } from 'rxjs'
+import { from, pluck } from 'rxjs'
 import { BrowserService } from '../../browser.service'
 import { AbstractControl, FormArray, FormBuilder } from '@angular/forms'
 import { ActivatedRoute } from '@angular/router'
-import { map, switchMap, tap } from 'rxjs/operators'
+import { map, switchMap } from 'rxjs/operators'
 import { Rule } from 'src/app/rule.service'
-import { ArticleParserService } from '../../article-parser.service'
-import defaultTemplate from '../../assets/default.eta'
+import defaultTemplate from '../../../assets/default.template'
 
 @Component({
   selector: 'app-rules',
@@ -22,8 +21,7 @@ export class RulesComponent implements OnInit {
   constructor(
     private browserService: BrowserService,
     private fb: FormBuilder,
-    route: ActivatedRoute,
-    private articleParserService: ArticleParserService
+    route: ActivatedRoute
   ) {
     // TODO 符合 url 的规则排在上面
   }
@@ -77,12 +75,9 @@ export class RulesComponent implements OnInit {
     })
 
   ngOnInit(): void {
-    concat(
-      from(browser.storage.local.get('rules')).pipe(pluck('rules')),
-      this.browserService.storage.change('local').pipe(pluck('rules', 'newValue'))
-    ).subscribe((rules) => {
+    from(browser.storage.local.get('rules')).pipe(pluck('rules')).subscribe((rules) =>
       this.form.setControl('rules', this.fb.array(rules?.map((it: Rule) => this.ruleToForm(it)) ?? []))
-    })
+    )
     this.form.valueChanges
       .pipe(
         map((it) =>
@@ -95,7 +90,6 @@ export class RulesComponent implements OnInit {
             }))
             .filter((rule: Rule) => rule.patterns?.length)
         ),
-        tap((value) => this.articleParserService.rules(value)),
         switchMap((value) => browser.storage.local.set({ rules: value }))
       )
       .subscribe()

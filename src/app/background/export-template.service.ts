@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core'
-import * as Eta from 'eta'
 import { URLPatternInit } from 'urlpattern-polyfill/src/url-pattern.interfaces'
 import { BrowserService } from '../browser.service'
 import { filter, map } from 'rxjs/operators'
 import { RuleService } from '../rule.service'
-import { defaultIfEmpty, pluck } from 'rxjs'
-import defaultTemplate from '../../assets/default.eta'
+import { Observable, pluck } from 'rxjs'
+import defaultTemplate from '../../assets/default.template'
+import { render } from 'micromustache'
 
 @Injectable({
   providedIn: 'root'
@@ -14,12 +14,6 @@ export class ExportTemplateService {
   private templates: { pattern: URLPatternInit; template: string }[] = []
 
   constructor(browserService: BrowserService, private ruleService: RuleService) {
-    Eta.configure({
-      tags: ['{{', '}}'],
-      include: undefined,
-      includeFile: undefined
-    })
-
     browserService.storage
       .change('local')
       .pipe(
@@ -29,8 +23,11 @@ export class ExportTemplateService {
       .subscribe((it) => (this.templates = it))
   }
 
-  get = (url: string) => this.ruleService.first(url).pipe(pluck('template'), defaultIfEmpty(defaultTemplate))
+  get = (url: string) => this.ruleService.first(url).pipe(
+    pluck('template'),
+    map(it => it ?? defaultTemplate)
+  ) as Observable<string>
 
-  render = (template: string, data: { title: string; url: string; content: string }) =>
-    Eta.render(template, data, { async: false }) as string
+
+  render = (template: string, data: { title: string; url: string; content: string }) => render(template, data)
 }

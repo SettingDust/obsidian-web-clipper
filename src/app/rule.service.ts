@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core'
-import { filter, first, from, Observable } from 'rxjs'
+import { filter, first, from, Observable, pluck } from 'rxjs'
 import { URLPattern } from 'urlpattern-polyfill'
+import { BrowserService } from './browser.service'
+import { ArticleParserService } from './article-parser.service'
 
 @Injectable({
   providedIn: 'root'
 })
 export class RuleService {
-  constructor() {}
+  constructor(browserService: BrowserService, articleParserService: ArticleParserService) {
+    browserService.storage.change('local').pipe(pluck('rules', 'newValue')).subscribe(rules => articleParserService.rules(rules))
+  }
 
   /**
    * All rule that success with url

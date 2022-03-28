@@ -1,4 +1,4 @@
-declare module '*.eta' {
+declare module '*.template' {
   const content: string
   export default content
 }

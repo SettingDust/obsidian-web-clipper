@@ -41,7 +41,7 @@ export class BrowserService {
   }
 
   private change$ = new Observable<[changes: { [key: string]: browser.storage.StorageChange }, area: string]>(
-    ({ next }) => browser.storage.onChanged.addListener((change, area) => next([change, area]))
+    (subscriber) => browser.storage.onChanged.addListener((change, area) => subscriber.next([change, area]))
   )
 
   storage = {
@@ -59,11 +59,9 @@ export interface ContentActions extends Actions {
 
 export type ContentAction = keyof ContentActions
 
-export type ContentActionMessage<T extends ContentAction, U extends ActionDataType> = ActionMessage<
-  ContentActions,
+export type ContentActionMessage<T extends ContentAction, U extends ActionDataType> = ActionMessage<ContentActions,
   T,
-  U
->
+  U>
 
 type ContentMessageListener<T extends ContentAction> = {
   message: ContentActionMessage<T, 'receive'>

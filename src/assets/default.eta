@@ -1,4 +1,0 @@
-# {{ it.title }}
-*[it.url]({{ it.url }})*
-
-{{ it.content }}

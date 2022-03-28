@@ -5,15 +5,9 @@ const { Configuration } = require('webpack')
  */
 module.exports = {
   module: {
-    rules: [{ test: /\.eta$/, type: 'asset/source' }]
+    rules: [{ test: /\.template$/, type: 'asset/source' }]
   },
   externals: {
     'node:path': {}
-  },
-  resolve: {
-    fallback: {
-      path: false,
-      fs: false
-    }
   }
 }
