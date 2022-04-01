@@ -15,6 +15,10 @@ jobs:
         with:
           node-version: 16
           cache: 'yarn'
+      - uses: papeloto/action-zip@v1
+        with:
+          files: .
+          dest: src.zip
       - run: yarn
       - run: yarn build:angular
       - run: yarn build:content
@@ -24,17 +28,13 @@ jobs:
         uses: kewisch/action-web-ext@v1
         with:
           cmd: build
-          source: src
+          source: dist
           filename: "{name}-{version}.xpi"
       - name: "Upload Artifact"
         uses: actions/upload-artifact@v3
         with:
           name: addon.xpi
           path: ${{ steps.web-ext-build.outputs.target }}
-      - uses: papeloto/action-zip@v1
-        with:
-          files: src
-          dest: src.zip
       - name: "Publish"
         uses: SettingDust/publish-firefox-addon-action@v0
         with:
