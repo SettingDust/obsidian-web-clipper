@@ -43,3 +43,4 @@ jobs:
           jwtSecret: ${{ secrets.FIREFOX_JWT_SECRET }}
           addonFile: ${{ steps.web-ext-build.outputs.target }}
           sourceFile: src.zip
+          manifestFile: dist/manifest.json
