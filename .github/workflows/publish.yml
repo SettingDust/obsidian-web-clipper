@@ -1,0 +1,45 @@
+name: Publish Firefox Addon
+
+on:
+  release:
+    types:
+      - released
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js 16
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+          cache: 'yarn'
+      - run: yarn
+      - run: yarn build:angular
+      - run: yarn build:content
+      - run: yarn lint
+      - name: "web-ext build"
+        id: web-ext-build
+        uses: kewisch/action-web-ext@v1
+        with:
+          cmd: build
+          source: src
+          filename: "{name}-{version}.xpi"
+      - name: "Upload Artifact"
+        uses: actions/upload-artifact@v3
+        with:
+          name: addon.xpi
+          path: ${{ steps.web-ext-build.outputs.target }}
+      - uses: papeloto/action-zip@v1
+        with:
+          files: src
+          dest: src.zip
+      - name: "Publish"
+        uses: SettingDust/publish-firefox-addon-action@v0
+        with:
+          addonId: dust-obsidian-web-clipper
+          jwtIssuer: ${{ secrets.FIREFOX_JWT_ISSUER }}
+          jwtSecret: ${{ secrets.FIREFOX_JWT_SECRET }}
+          addonFile: ${{ steps.web-ext-build.outputs.target }}
+          sourceFile: src.zip
