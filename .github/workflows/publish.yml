@@ -1,6 +1,7 @@
 name: Publish Firefox Addon
 
 on:
+  workflow_dispatch:
   release:
     types:
       - released
@@ -36,7 +37,7 @@ jobs:
           name: addon.xpi
           path: ${{ steps.web-ext-build.outputs.target }}
       - name: "Publish"
-        uses: SettingDust/publish-firefox-addon-action@v0
+        uses: SettingDust/publish-firefox-addon-action@master
         with:
           addonId: dust-obsidian-web-clipper
           jwtIssuer: ${{ secrets.FIREFOX_JWT_ISSUER }}
