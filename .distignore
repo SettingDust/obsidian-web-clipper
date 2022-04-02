@@ -1,0 +1,8 @@
+.git
+.github
+node_modules
+dist
+/.yarn/*
+!/.yarn/releases
+.idea
+web-ext-artifacts

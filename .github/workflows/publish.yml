@@ -15,11 +15,12 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 16
-          cache: 'yarn'
-      - uses: papeloto/action-zip@v1
+          cache: yarn
+      - name: Compress src
+        id: compress-src
+        uses: byteever/action-build-zip@master
         with:
-          files: .
-          dest: src.zip
+          filename: 'src.zip'
       - run: yarn
       - run: yarn build:angular
       - run: yarn build:content
@@ -37,11 +38,11 @@ jobs:
           name: addon.xpi
           path: ${{ steps.web-ext-build.outputs.target }}
       - name: "Publish"
-        uses: SettingDust/publish-firefox-addon-action@master
+        uses: SettingDust/publish-firefox-addon-action@ma
         with:
-          addonId: dust-obsidian-web-clipper
+          addonId: 'dust-obsidian-web-clipper'
           jwtIssuer: ${{ secrets.FIREFOX_JWT_ISSUER }}
           jwtSecret: ${{ secrets.FIREFOX_JWT_SECRET }}
           addonFile: ${{ steps.web-ext-build.outputs.target }}
-          sourceFile: src.zip
+          sourceFile: ${{ steps.compress-src.outputs.zip_path }}
           manifestFile: dist/manifest.json
