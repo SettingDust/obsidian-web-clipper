@@ -2,7 +2,10 @@
 .github
 node_modules
 dist
-/.yarn/*
-!/.yarn/releases
+
+.yarn/install-state.gz
+.yarn/cache
+yarn-error.log
+
 .idea
 web-ext-artifacts
