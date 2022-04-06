@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core'
-import { URLPatternInit } from 'urlpattern-polyfill/src/url-pattern.interfaces'
 import { BrowserService } from '../browser.service'
 import { filter, map } from 'rxjs/operators'
 import { RuleService } from '../rule.service'
 import { Observable, pluck } from 'rxjs'
 import defaultTemplate from '../../assets/default.template'
 import { render } from 'micromustache'
+import { URLPatternInit } from 'urlpattern-polyfill'
 
 @Injectable({
   providedIn: 'root'
