@@ -2,7 +2,7 @@
   "name": "obsidian-web-clipper",
   "packageManager": "yarn@3.1.1",
   "type": "module",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "scripts": {
     "ng": "ng",
     "format": "prettier --write .",
