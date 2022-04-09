@@ -1,9 +1,9 @@
-#options {
+:host {
   table {
     width: 100%;
 
     .action-column {
-      & > .wrapper {
+      & > ::ng-deep .wrapper {
         display: flex;
 
         & > * {

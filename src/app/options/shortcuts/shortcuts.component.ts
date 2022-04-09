@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core'
+import { Component } from '@angular/core'
 import { AbstractControl, FormArray, FormBuilder, Validators } from '@angular/forms'
 import { concat, from, of } from 'rxjs'
 import { map, switchMap, tap } from 'rxjs/operators'
@@ -6,8 +6,7 @@ import { map, switchMap, tap } from 'rxjs/operators'
 @Component({
   selector: 'app-shortcuts',
   templateUrl: './shortcuts.component.html',
-  styleUrls: ['./shortcuts.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./shortcuts.component.scss']
 })
 export class ShortcutsComponent {
   required = ['hotkey']

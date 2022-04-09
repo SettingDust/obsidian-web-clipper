@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { from, pluck } from 'rxjs'
 import { BrowserService } from '../../browser.service'
 import { AbstractControl, FormArray, FormBuilder } from '@angular/forms'
@@ -10,8 +10,7 @@ import defaultTemplate from '../../../assets/default.template'
 @Component({
   selector: 'app-rules',
   templateUrl: './rules.component.html',
-  styleUrls: ['./rules.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./rules.component.scss']
 })
 export class RulesComponent implements OnInit {
   form = this.fb.group({
