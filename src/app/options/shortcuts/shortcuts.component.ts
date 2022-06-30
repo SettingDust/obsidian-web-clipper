@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { AbstractControl, FormArray, FormBuilder, Validators } from '@angular/forms'
+import { AbstractControl, UntypedFormArray, UntypedFormBuilder, Validators } from '@angular/forms'
 import { concat, from, of } from 'rxjs'
 import { map, switchMap, tap } from 'rxjs/operators'
 
@@ -15,7 +15,7 @@ export class ShortcutsComponent {
   })
   actions: string[] = []
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: UntypedFormBuilder) {
     from(browser.storage.local.get('shortcuts'))
       .pipe(
         map((it) => it.shortcuts as [{ shortcut: string; action: string } & any]),
@@ -38,7 +38,7 @@ export class ShortcutsComponent {
   }
 
   get shortcuts() {
-    return this.form.get('shortcuts') as FormArray
+    return this.form.get('shortcuts') as UntypedFormArray
   }
 
   addShortcut(data: { shortcut: string; action: string } & any = { shortcut: '', action: 'option' }) {

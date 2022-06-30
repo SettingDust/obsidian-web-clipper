@@ -14,7 +14,7 @@ import defaultTemplate from '../../../assets/default.template'
 })
 export class RulesComponent implements OnInit {
   form = this.fb.group({
-    rules: this.fb.array([])
+    rules: this.fb.array<Rule>([])
   })
 
   constructor(
@@ -80,14 +80,13 @@ export class RulesComponent implements OnInit {
     this.form.valueChanges
       .pipe(
         map((it) =>
-          it.rules
-            .map((rule: Rule) => ({
-              patterns: rule.patterns.filter((pattern) => pattern?.length),
-              selector: rule.selector,
-              unwanted: rule.unwanted?.filter((entry) => entry?.length),
-              template: rule.template ?? defaultTemplate
+          it.rules?.map((rule) => ({
+              patterns: rule?.patterns.filter((pattern) => pattern?.length),
+              selector: rule?.selector,
+              unwanted: rule?.unwanted?.filter((entry) => entry?.length),
+              template: rule?.template ?? defaultTemplate
             }))
-            .filter((rule: Rule) => rule.patterns?.length)
+            .filter((rule) => rule.patterns?.length)
         ),
         switchMap((value) => browser.storage.local.set({ rules: value }))
       )
