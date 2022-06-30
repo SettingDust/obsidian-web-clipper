@@ -5,13 +5,13 @@ import { RuleService } from '../rule.service'
 import { Observable, pluck } from 'rxjs'
 import defaultTemplate from '../../assets/default.template'
 import { render } from 'micromustache'
-import { URLPatternInit } from 'urlpattern-polyfill'
+import 'urlpattern-polyfill'
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExportTemplateService {
-  private templates: { pattern: URLPatternInit; template: string }[] = []
+  private templates: { pattern: URLPatternInit | string; template: string }[] = []
 
   constructor(browserService: BrowserService, private ruleService: RuleService) {
     browserService.storage

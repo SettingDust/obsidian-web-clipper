@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core'
 import { filter, first, from, Observable, pluck } from 'rxjs'
-import { URLPattern } from 'urlpattern-polyfill'
 import { BrowserService } from './browser.service'
 import { ArticleParserService } from './article-parser.service'
+import "urlpattern-polyfill"
 
 @Injectable({
   providedIn: 'root'
