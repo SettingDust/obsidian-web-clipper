@@ -29,16 +29,16 @@ export class BackgroundComponent {
         vault: '',
         shortcuts: [
           {
-            shortcut: 'o p',
+            shortcut: 'Alt+o Alt+p',
             action: 'option'
           },
           {
-            shortcut: 'r l',
+            shortcut: 'Alt+r Alt+l',
             action: 'export',
             path: i18n.transform('optionShortcutReadLater')
           },
           {
-            shortcut: 'm o',
+            shortcut: 'Alt+m Alt+o',
             action: 'export',
             path: i18n.transform('optionShortcutMemo')
           }
