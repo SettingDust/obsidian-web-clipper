@@ -241,6 +241,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@angular/cdk@npm:^14.0.4":
+  version: 14.0.4
+  resolution: "@angular/cdk@npm:14.0.4"
+  dependencies:
+    parse5: ^5.0.0
+    tslib: ^2.3.0
+  peerDependencies:
+    "@angular/common": ^14.0.0 || ^15.0.0
+    "@angular/core": ^14.0.0 || ^15.0.0
+    rxjs: ^6.5.3 || ^7.4.0
+  dependenciesMeta:
+    parse5:
+      optional: true
+  checksum: b5e1cfbc8094bf2feb31a7c71a7f569a63cee2db7d6a782819d0f1767db37e984ced83656f261dc6436db27fef3ef673ef07fd9059db0aa7d418c414f04dfb93
+  languageName: node
+  linkType: hard
+
 "@angular/cli@npm:^14.0.4":
   version: 14.0.4
   resolution: "@angular/cli@npm:14.0.4"
@@ -2247,15 +2264,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@guyplusplus/turndown-plugin-gfm@npm:^1.0.7":
-  version: 1.0.7
-  resolution: "@guyplusplus/turndown-plugin-gfm@npm:1.0.7"
-  dependencies:
-    turndown: ^7.1.1
-  checksum: 2f3ec461880d647d6b8517896216cdb27ab549fea16f91dd0e64c8b2e0bcf5ce54b966522c96275ca9f453f155bbfd6d45233ca855be08c394769fb14845bb35
-  languageName: node
-  linkType: hard
-
 "@humanwhocodes/config-array@npm:^0.9.2":
   version: 0.9.3
   resolution: "@humanwhocodes/config-array@npm:0.9.3"
@@ -3012,6 +3020,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/sanitize-html@npm:^2.6.2":
+  version: 2.6.2
+  resolution: "@types/sanitize-html@npm:2.6.2"
+  dependencies:
+    htmlparser2: ^6.0.0
+  checksum: 08b43427427cbd8acd2843bbf9e00576c06e3916fc523d27fd9016f39563f7999f78b632ff473ef83a77f86bdea9286de2f81e3a8f8a05af6721687651c84f1c
+  languageName: node
+  linkType: hard
+
 "@types/serve-index@npm:^1.9.1":
   version: 1.9.1
   resolution: "@types/serve-index@npm:1.9.1"
@@ -3044,13 +3061,6 @@ __metadata:
   version: 2.0.2
   resolution: "@types/trusted-types@npm:2.0.2"
   checksum: 3371eef5f1c50e1c3c07a127c1207b262ba65b83dd167a1c460fc1b135a3fb0c97b9f508efebd383f239cc5dd5b7169093686a692a501fde9c3f7208657d9b0d
-  languageName: node
-  linkType: hard
-
-"@types/turndown@npm:^5.0.1":
-  version: 5.0.1
-  resolution: "@types/turndown@npm:5.0.1"
-  checksum: 137c02fb863f96a2f032292fbfaf958fb784b62d97acb6a4968c012d365fa092997443584bd50205f89ad9128c729119efdf5db67cdda586f1cdd43049b26d6b
   languageName: node
   linkType: hard
 
@@ -3786,20 +3796,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"article-parser@npm:^6.0.1":
-  version: 6.0.1
-  resolution: "article-parser@npm:6.0.1"
+"article-parser@npm:^6.0.2":
+  version: 6.0.2
+  resolution: "article-parser@npm:6.0.2"
   dependencies:
     "@mozilla/readability": ^0.4.2
     axios: ^0.27.2
-    bellajs: ^11.0.2
+    bellajs: ^11.0.3
     debug: ^4.3.4
     html-crush: ^5.0.18
-    linkedom: ^0.14.9
+    linkedom: ^0.14.12
     sanitize-html: ^2.7.0
     string-comparison: ^1.1.0
     urlpattern-polyfill: ^5.0.3
-  checksum: 31b32ffdd9455164b212f9261e1cb2b158b1d7e1d8d46c5578c32bab82499227784fb3fec17d03e7d2537d4e72031a848946e061967b6bbf6f4aed97a21e556a
+  checksum: f20a468507835b257691c344e0d20d9777f5d662813bd79105ab6f1b325932a03850afc3356d7c7460741e5bfecbc543e99218ef064697f84f4413ece2b2c548
   languageName: node
   linkType: hard
 
@@ -4030,10 +4040,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bellajs@npm:^11.0.2":
-  version: 11.0.2
-  resolution: "bellajs@npm:11.0.2"
-  checksum: e1025874eae0936141768536c4323ec1d1d478094307f9abc9f80f582de145dabf76051373ba040e1b155a799c877413e9c399548d79da9d7a08c5e0cb833767
+"bellajs@npm:^11.0.3":
+  version: 11.0.3
+  resolution: "bellajs@npm:11.0.3"
+  checksum: 53226dae5097bd01966191e5201fe8c95a1ca8247f258077fb910b084691ec68fbb134ecd586f0b073e2796422042947fd5f3b76ec0c6fefd4fd2aefdb5e1b05
   languageName: node
   linkType: hard
 
@@ -5152,6 +5162,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"css-select@npm:^4.2.1":
+  version: 4.3.0
+  resolution: "css-select@npm:4.3.0"
+  dependencies:
+    boolbase: ^1.0.0
+    css-what: ^6.0.1
+    domhandler: ^4.3.1
+    domutils: ^2.8.0
+    nth-check: ^2.0.1
+  checksum: d6202736839194dd7f910320032e7cfc40372f025e4bf21ca5bf6eb0a33264f322f50ba9c0adc35dadd342d3d6fae5ca244779a4873afbfa76561e343f2058e0
+  languageName: node
+  linkType: hard
+
 "css-select@npm:^5.1.0":
   version: 5.1.0
   resolution: "css-select@npm:5.1.0"
@@ -5172,7 +5195,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"css-what@npm:^6.1.0":
+"css-what@npm:^6.0.1, css-what@npm:^6.1.0":
   version: 6.1.0
   resolution: "css-what@npm:6.1.0"
   checksum: b975e547e1e90b79625918f84e67db5d33d896e6de846c9b584094e529f0c63e2ab85ee33b9daffd05bff3a146a1916bec664e18bb76dd5f66cbff9fc13b2bbe
@@ -5521,19 +5544,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"domhandler@npm:^4.3.1":
+  version: 4.3.1
+  resolution: "domhandler@npm:4.3.1"
+  dependencies:
+    domelementtype: ^2.2.0
+  checksum: 4c665ceed016e1911bf7d1dadc09dc888090b64dee7851cccd2fcf5442747ec39c647bb1cb8c8919f8bbdd0f0c625a6bafeeed4b2d656bbecdbae893f43ffaaa
+  languageName: node
+  linkType: hard
+
 "domhandler@npm:^5.0.1, domhandler@npm:^5.0.2, domhandler@npm:^5.0.3":
   version: 5.0.3
   resolution: "domhandler@npm:5.0.3"
   dependencies:
     domelementtype: ^2.3.0
   checksum: 0f58f4a6af63e6f3a4320aa446d28b5790a009018707bce2859dcb1d21144c7876482b5188395a188dfa974238c019e0a1e610d2fc269a12b2c192ea2b0b131c
-  languageName: node
-  linkType: hard
-
-"domino@npm:^2.1.6":
-  version: 2.1.6
-  resolution: "domino@npm:2.1.6"
-  checksum: 9b1b6d2661efd8bf942b70d5e11ac0de6a63f17e49b7eb227d9a612fa7b7c12b7775520d64f498988a8ee334ea9c59a463c84ea510b0af17dd3e13fdce120410
   languageName: node
   linkType: hard
 
@@ -7292,6 +7317,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"he@npm:1.2.0":
+  version: 1.2.0
+  resolution: "he@npm:1.2.0"
+  bin:
+    he: bin/he
+  checksum: 3d4d6babccccd79c5c5a3f929a68af33360d6445587d628087f39a965079d84f18ce9c3d3f917ee1e3978916fc833bb8b29377c3b403f919426f91bc6965e7a7
+  languageName: node
+  linkType: hard
+
 "highlight.js@npm:^10.0.0":
   version: 10.7.3
   resolution: "highlight.js@npm:10.7.3"
@@ -8700,7 +8734,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"linkedom@npm:^0.14.9":
+"linkedom@npm:^0.14.12":
   version: 0.14.12
   resolution: "linkedom@npm:0.14.12"
   dependencies:
@@ -9703,6 +9737,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"node-html-markdown@https://github.com/SettingDust/node-html-markdown":
+  version: 1.2.0
+  resolution: "node-html-markdown@https://github.com/SettingDust/node-html-markdown.git#commit=08e9ef41425f458d8fbb56080387a8dff1e0c095"
+  dependencies:
+    node-html-parser: ^5.3.3
+  checksum: 1c28ca7c2d57cbb2b9731ae56e3d33c3172ba1db7f1bd24d87d082a492bf8e074f4035a08089cc3f30d9403fd561199ba55d69db389dc3f49cede150bc6620c3
+  languageName: node
+  linkType: hard
+
+"node-html-parser@npm:^5.3.3":
+  version: 5.3.3
+  resolution: "node-html-parser@npm:5.3.3"
+  dependencies:
+    css-select: ^4.2.1
+    he: 1.2.0
+  checksum: 57c61d5c34fd8c6139ef497cd8d7a4b1b8f4c127986d7a8624f83ba31d3e4a5fdea2684b021989f6bf920d517f8075068f05f031e8813e84fc42569906704cad
+  languageName: node
+  linkType: hard
+
 "node-notifier@npm:10.0.1":
   version: 10.0.1
   resolution: "node-notifier@npm:10.0.1"
@@ -10077,6 +10130,7 @@ __metadata:
   dependencies:
     "@angular-devkit/build-angular": ^14.0.4
     "@angular/animations": ^14.0.4
+    "@angular/cdk": ^14.0.4
     "@angular/cli": ^14.0.4
     "@angular/common": ^14.0.4
     "@angular/compiler": ^14.0.4
@@ -10088,7 +10142,6 @@ __metadata:
     "@angular/platform-browser-dynamic": ^14.0.4
     "@angular/router": ^14.0.4
     "@availity/resolve-url": ^2.0.3
-    "@guyplusplus/turndown-plugin-gfm": ^1.0.7
     "@taiga-ui/addon-doc": ^2.51.1
     "@taiga-ui/addon-table": ^2.51.1
     "@taiga-ui/addon-tablebars": ^2.51.1
@@ -10100,19 +10153,19 @@ __metadata:
     "@types/dompurify": ^2.3.3
     "@types/firefox-webext-browser": ^94.0.1
     "@types/node": ~16.11.42
-    "@types/turndown": ^5.0.1
+    "@types/sanitize-html": ^2.6.2
     "@webcomponents/custom-elements": ^1.5.0
-    article-parser: ^6.0.1
+    article-parser: ^6.0.2
     dompurify: ^2.3.8
     filenamify: ^5.1.1
     micromustache: ^8.0.3
     ngx-build-plus: ^14.0.0
+    node-html-markdown: "https://github.com/SettingDust/node-html-markdown"
     npm-run-all: ^4.1.5
     prettier: ^2.7.1
     rxjs: ~7.5.5
     tinykeys: ^1.4.0
     tslib: ^2.4.0
-    turndown: ^7.1.1
     typescript: 4.6.3
     urlpattern-polyfill: ^5.0.3
     web-ext: ^7.1.0
@@ -13397,15 +13450,6 @@ __metadata:
   dependencies:
     safe-buffer: ^5.0.1
   checksum: 05f6510358f8afc62a057b8b692f05d70c1782b70db86d6a1e0d5e28a32389e52fa6e7707b6c5ecccacc031462e4bc35af85ecfe4bbc341767917b7cf6965711
-  languageName: node
-  linkType: hard
-
-"turndown@npm:^7.1.1":
-  version: 7.1.1
-  resolution: "turndown@npm:7.1.1"
-  dependencies:
-    domino: ^2.1.6
-  checksum: f2d77632bd69bc93298b619f051dc0c050fabee15188afe874eab713f8ffdcaea89106a536c19db0962a677b5f7177f5aa84b45ef38e06d6e489a49f11abd80d
   languageName: node
   linkType: hard
 
