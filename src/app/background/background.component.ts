@@ -7,7 +7,7 @@ import { MarkdownService } from './markdown.service'
 import filenamify from 'filenamify'
 import { ArticleParserService } from '../article-parser.service'
 import { I18nPipe } from '../i18n.pipe'
-import { ExportTemplateService } from './export-template.service'
+import { ExportTemplateService } from '../export-template.service'
 
 @Component({
   selector: 'app-background',

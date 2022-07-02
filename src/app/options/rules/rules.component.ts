@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router'
 import { map, switchMap } from 'rxjs/operators'
 import { Rule } from 'src/app/rule.service'
 import defaultTemplate from '../../../assets/default.template'
+import { ExportTemplateService } from '../../export-template.service'
 
 @Component({
   selector: 'app-rules',
@@ -20,6 +21,7 @@ export class RulesComponent implements OnInit {
   constructor(
     private browserService: BrowserService,
     private fb: FormBuilder,
+    private templateService: ExportTemplateService,
     route: ActivatedRoute
   ) {
     // TODO 符合 url 的规则排在上面
@@ -36,11 +38,7 @@ export class RulesComponent implements OnInit {
   unwanted = (rule: AbstractControl) => rule.get('unwanted') as FormArray
 
   addRule(
-    data: {
-      patterns: string[]
-      selector?: string
-      unwanted?: string[]
-    } = { patterns: [''] }
+    data: Rule = { patterns: [''], template: this.templateService.defaultTemplate }
   ) {
     this.rules.insert(0, this.ruleToForm(data))
   }
@@ -81,11 +79,11 @@ export class RulesComponent implements OnInit {
       .pipe(
         map((it) =>
           it.rules?.map((rule) => ({
-              patterns: rule?.patterns.filter((pattern) => pattern?.length),
-              selector: rule?.selector,
-              unwanted: rule?.unwanted?.filter((entry) => entry?.length),
-              template: rule?.template ?? defaultTemplate
-            }))
+            patterns: rule?.patterns.filter((pattern) => pattern?.length),
+            selector: rule?.selector,
+            unwanted: rule?.unwanted?.filter((entry) => entry?.length),
+            template: rule?.template ?? defaultTemplate
+          }))
             .filter((rule) => rule.patterns?.length)
         ),
         switchMap((value) => browser.storage.local.set({ rules: value }))
