@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { filter, map } from 'rxjs/operators'
 import { from, mapTo, Observable } from 'rxjs'
 import { ActionData, ActionDataType, ActionMessage, Actions } from '../action'
-import { ExportData } from './article-parser.service'
+import { ExportData } from './article-extractor.service'
 import MessageSender = browser.runtime.MessageSender
 
 @Injectable({

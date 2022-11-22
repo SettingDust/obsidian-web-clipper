@@ -5,7 +5,7 @@ import { catchError, combineLatestWith, from, throwError } from 'rxjs'
 import { filter, map, switchMap } from 'rxjs/operators'
 import { MarkdownService } from './markdown.service'
 import filenamify from 'filenamify'
-import { ArticleParserService } from '../article-parser.service'
+import { ArticleExtractorService } from '../article-extractor.service'
 import { I18nPipe } from '../i18n.pipe'
 import { ExportTemplateService } from '../export-template.service'
 
@@ -19,7 +19,7 @@ export class BackgroundComponent {
     browserService: BrowserService,
     obsidianService: ObsidianService,
     markdownService: MarkdownService,
-    articleParserService: ArticleParserService,
+    articleParserService: ArticleExtractorService,
     templateService: ExportTemplateService,
     i18n: I18nPipe
   ) {

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { ArticleData, extract, setQueryRules } from 'article-parser'
+import { addTransformations, ArticleData, extract, setQueryRules } from 'article-parser'
 import { combineLatest, combineLatestWith, defaultIfEmpty, from, Observable, of, switchMap, tap } from 'rxjs'
 import { filter, map } from 'rxjs/operators'
 import resolveUrl from '@availity/resolve-url'
@@ -8,10 +8,12 @@ import { Rule } from './rule.service'
 @Injectable({
   providedIn: 'root'
 })
-export class ArticleParserService {
+export class ArticleExtractorService {
   constructor() {}
 
-  rules = (rules: Rule[]) => setQueryRules(rules)
+  rules = (rules: Rule[]) => addTransformations(rules.map((rule) =>({
+    patterns: rule.patterns.map(it => new URLPattern(it))
+  })))
 
   extract = ({ url, document, selection }: ExportData): Observable<ArticleData> =>
     combineLatest([

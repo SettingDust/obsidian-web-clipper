@@ -8,6 +8,7 @@
       <excludeFolder url="file://$MODULE_DIR$/dist" />
       <excludeFolder url="file://$MODULE_DIR$/.yarn/cache" />
       <excludeFolder url="file://$MODULE_DIR$/.angular/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/.yarn" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

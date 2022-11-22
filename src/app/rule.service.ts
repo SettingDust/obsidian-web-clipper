@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core'
 import { filter, first, from, Observable, pluck } from 'rxjs'
 import { BrowserService } from './browser.service'
-import { ArticleParserService } from './article-parser.service'
-import "urlpattern-polyfill"
+import { ArticleExtractorService } from './article-extractor.service'
+import 'urlpattern-polyfill'
+import { map } from 'rxjs/operators'
 
 @Injectable({
   providedIn: 'root'
 })
 export class RuleService {
-  constructor(browserService: BrowserService, articleParserService: ArticleParserService) {
-    browserService.storage.change('local').pipe(pluck('rules', 'newValue')).subscribe(rules => articleParserService.rules(rules))
+  constructor(browserService: BrowserService, articleParserService: ArticleExtractorService) {
+    browserService.storage.change('local').pipe(map(it => it?.rules?.newValue)).subscribe(rules => articleParserService.rules(rules))
   }
 
   /**
@@ -24,7 +25,7 @@ export class RuleService {
 
 export interface Rule {
   patterns: string[]
-  selector?: string
-  unwanted?: string[]
+  selector?: string[]
+  ignored?: string[]
   template?: string
 }

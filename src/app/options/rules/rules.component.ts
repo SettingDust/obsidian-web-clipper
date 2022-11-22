@@ -62,7 +62,7 @@ export class RulesComponent implements OnInit {
           }, this.fb.array([])) ?? this.fb.array([]),
       selector: this.fb.control(data.selector),
       unwanted:
-        data.unwanted
+        data.ignored
           ?.map((it) => this.fb.control(it))
           .reduce((prev, curr) => {
             prev.push(curr)
@@ -81,7 +81,7 @@ export class RulesComponent implements OnInit {
           it.rules?.map((rule) => ({
             patterns: rule?.patterns.filter((pattern) => pattern?.length),
             selector: rule?.selector,
-            unwanted: rule?.unwanted?.filter((entry) => entry?.length),
+            unwanted: rule?.ignored?.filter((entry) => entry?.length),
             template: rule?.template ?? defaultTemplate
           }))
             .filter((rule) => rule.patterns?.length)

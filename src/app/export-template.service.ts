@@ -28,8 +28,7 @@ export class ExportTemplateService {
   }
 
   get = (url: string) => this.ruleService.first(url).pipe(
-    pluck('template'),
-    map(it => it ?? this.defaultTemplate)
+    map(it => it?.template ?? this.defaultTemplate)
   ) as Observable<string>
 
 
