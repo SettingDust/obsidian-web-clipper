@@ -63,6 +63,9 @@
   "optionRuleSelectorDescription": {
     "message": "包含全部文章内容的 CSS 选择器"
   },
+  "optionRuleAddSelector": {
+    "message": "添加选择器"
+  },
   "optionRuleIgnored": {
     "message": "忽略"
   },

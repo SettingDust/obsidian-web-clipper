@@ -15,9 +15,17 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2020",
+    "target": "ES2020",
     "module": "commonjs",
-    "lib": ["es2018", "dom"]
+    "lib": [
+      "ES2018",
+      "DOM"
+    ],
+    "skipLibCheck": true,
+    "typeRoots": [
+      "node_modules/@types",
+      "node_modules/@settingdust/article-extractor/src/@types"
+    ]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

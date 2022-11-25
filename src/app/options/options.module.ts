@@ -7,7 +7,6 @@ import { ReactiveFormsModule } from '@angular/forms'
 import {
   TuiButtonModule,
   TuiDataListModule,
-  TuiHintControllerModule,
   TuiHintModule,
   TuiLinkModule,
   TuiSvgModule,
@@ -25,7 +24,6 @@ import { SharedModule } from '../shared.module'
     CommonModule,
     OptionsRoutingModule,
     ReactiveFormsModule,
-    TuiHintControllerModule,
     TuiInputModule,
     TuiLinkModule,
     TuiTableModule,

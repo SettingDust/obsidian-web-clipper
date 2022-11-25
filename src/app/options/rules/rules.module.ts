@@ -9,7 +9,7 @@ import { TuiAccordionModule, TuiBadgeModule, TuiInputModule, TuiTextAreaModule }
 import {
   TuiButtonModule,
   TuiGroupModule,
-  TuiHintControllerModule,
+  TuiHintModule,
   TuiNotificationModule,
   TuiTextfieldControllerModule,
   TuiTooltipModule
@@ -30,7 +30,7 @@ import { SharedModule } from '../../shared.module'
     TuiGroupModule,
     TuiInputModule,
     TuiTextfieldControllerModule,
-    TuiHintControllerModule,
+    TuiHintModule,
     TuiTooltipModule,
     TuiNotificationModule,
     TuiTextAreaModule

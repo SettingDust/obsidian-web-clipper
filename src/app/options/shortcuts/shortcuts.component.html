@@ -11,11 +11,17 @@
         <td *tuiCell="'shortcut'" tuiTd>
           <tui-input formControlName="shortcut"></tui-input>
         </td>
-        <td *tuiCell="'action'" tuiTd class="action-column">
-          <tui-select formControlName="action" [valueContent]="actionContent" [tuiTextfieldLabelOutside]="true">
-            <tui-data-list-wrapper *tuiDataList [items]="actions" [itemContent]="actionContent"></tui-data-list-wrapper>
-          </tui-select>
-          <tui-input formControlName="path" *ngIf="($shortcutChange(shortcut) | async) === 'export'"></tui-input>
+        <td *tuiCell="'action'" tuiTd>
+          <div class="action-column">
+            <tui-select formControlName="action" [valueContent]="actionContent" [tuiTextfieldLabelOutside]="true">
+              <tui-data-list-wrapper
+                *tuiDataList
+                [items]="actions"
+                [itemContent]="actionContent"
+              ></tui-data-list-wrapper>
+            </tui-select>
+            <tui-input formControlName="path" *ngIf="($shortcutChange(shortcut) | async) === 'export'"></tui-input>
+          </div>
         </td>
       </tr>
     </tbody>

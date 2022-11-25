@@ -1,0 +1,7 @@
+tui-root {
+  min-height: 100vh;
+
+  &[tuiMode="onDark"] {
+    background-color: #212121;
+  }
+}

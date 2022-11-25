@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { BrowserService } from './browser.service'
 import { filter, map } from 'rxjs/operators'
 import { RuleService } from './rule.service'
-import { Observable, pluck } from 'rxjs'
+import { Observable } from 'rxjs'
 import defaultTemplate from '../assets/default.template'
 import { render } from 'micromustache'
 import 'urlpattern-polyfill'
@@ -27,10 +27,8 @@ export class ExportTemplateService {
     return defaultTemplate
   }
 
-  get = (url: string) => this.ruleService.first(url).pipe(
-    map(it => it?.template ?? this.defaultTemplate)
-  ) as Observable<string>
-
+  get = (url: string) =>
+    this.ruleService.first(url).pipe(map((it) => it?.template ?? this.defaultTemplate)) as Observable<string>
 
   render = (template: string, data: { title: string; url: string; content: string }) => render(template, data)
 }

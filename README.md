@@ -14,4 +14,4 @@ yarn
 
 ## Build
 
-Run `yarn build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Run `yarn build` to build the project. The built artifacts will be stored in the `dist/` directory.

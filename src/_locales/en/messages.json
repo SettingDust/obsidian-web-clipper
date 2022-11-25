@@ -65,6 +65,9 @@
   "optionRuleSelectorDescription": {
     "message": "Css selector include the entire article"
   },
+  "optionRuleAddSelector": {
+    "message": "Add selector"
+  },
   "optionRuleIgnored": {
     "message": "Ignored"
   },

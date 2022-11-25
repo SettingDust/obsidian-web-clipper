@@ -1,4 +1,4 @@
-const { Configuration } = require('webpack')
+const { Configuration, DefinePlugin } = require('webpack')
 
 /**
  * @type {Configuration}
@@ -9,5 +9,13 @@ module.exports = {
   },
   externals: {
     'node:path': {}
-  }
+  },
+  experiments: {
+    topLevelAwait: true
+  },
+  plugins: [
+    new DefinePlugin({
+      'process.env.LOG_PERF': false
+    })
+  ]
 }

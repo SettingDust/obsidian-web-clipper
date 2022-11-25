@@ -2,13 +2,15 @@
   table {
     width: 100%;
 
-    .action-column {
-      & > ::ng-deep .wrapper {
-        display: flex;
+    .tui-table__th {
+      font: var(--tui-font-text-m);
+    }
 
-        & > * {
-          width: 100%;
-        }
+    .action-column {
+      display: flex;
+
+      & > * {
+        width: 100%;
       }
     }
   }

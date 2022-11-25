@@ -2,7 +2,7 @@ import { Component } from '@angular/core'
 import { BrowserService } from '../browser.service'
 import { ObsidianService } from './obsidian.service'
 import { catchError, combineLatestWith, from, throwError } from 'rxjs'
-import { filter, map, switchMap } from 'rxjs/operators'
+import { filter, map, switchMap, tap } from 'rxjs/operators'
 import { MarkdownService } from './markdown.service'
 import filenamify from 'filenamify'
 import { ArticleExtractorService } from '../article-extractor.service'
@@ -46,8 +46,8 @@ export class BackgroundComponent {
         rules: [
           {
             patterns: ['*://foo.bar/*', '*://exam.ple/*'],
-            selector: '#Article',
-            unwanted: ['.foo', '.bar']
+            selector: ['#Article'],
+            ignored: ['.foo', '.bar']
           }
         ]
       })
@@ -56,21 +56,25 @@ export class BackgroundComponent {
     browserService.message
       .actionListener('export')
       .pipe(
+        tap((it) => console.debug('[action:export]: ', it.message)),
         switchMap(({ message: { document, url: rawUrl, selection, path = '' }, sender }) =>
           articleParserService.extract({ document, url: rawUrl, selection }).pipe(
+            tap(it => console.debug('[article-extractor]: ', it)),
             map(({ title, content, url }) => ({
               title: title ?? '',
               content: markdownService.convert(selection ?? content ?? ''),
               path,
               url: url ?? rawUrl
             })),
-            switchMap(({ title, content, path, url }) => templateService.get(url).pipe(
-              map((template) => ({
-                title,
-                path,
-                content: templateService.render(template, { title, url, content })
-              }))
-            )),
+            switchMap(({ title, content, path, url }) =>
+              templateService.get(url).pipe(
+                map((template) => ({
+                  title,
+                  path,
+                  content: templateService.render(template, { title, url, content })
+                }))
+              )
+            ),
             combineLatestWith(browser.storage.local.get('vault')),
             map(([{ title, content, path }, { vault }]) => ({
               name: `${path}/${filenamify(title)}`,

@@ -1,5 +1,12 @@
 import { NgDompurifySanitizer } from '@tinkoff/ng-dompurify'
-import { TUI_SANITIZER, TuiRootModule } from '@taiga-ui/core'
+import {
+  TUI_SANITIZER,
+  TuiAlertModule,
+  TuiDialogModule,
+  TuiModeModule,
+  TuiRootModule,
+  TuiThemeNightModule
+} from '@taiga-ui/core'
 import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 
@@ -10,7 +17,16 @@ import { I18nPipe } from './i18n.pipe'
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, TuiRootModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    TuiRootModule,
+    TuiDialogModule,
+    TuiAlertModule,
+    TuiThemeNightModule,
+    TuiModeModule
+  ],
   providers: [{ provide: TUI_SANITIZER, useClass: NgDompurifySanitizer }, I18nPipe],
   bootstrap: [AppComponent]
 })

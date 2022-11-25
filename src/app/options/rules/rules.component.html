@@ -1,69 +1,81 @@
-<form [formGroup]='form' id='options' class='tui-container tui-container_adaptive tui-space_top-4'>
+<form [formGroup]="form" id="options" class="tui-container tui-container_adaptive tui-space_top-4">
   <tui-notification>{{ 'optionRuleNotification' | i18n }}</tui-notification>
-  <button tuiButton size='m' class='tui-space_bottom-2 tui-space_top-2' icon='tuiIconPlus' (click)='addRule()'>
+  <button tuiButton size="m" class="tui-space_bottom-2 tui-space_top-2" icon="tuiIconPlus" (click)="addRule()">
     {{ 'optionRuleAdd' | i18n }}
   </button>
-  <tui-accordion formArrayName='rules'>
-    <tui-accordion-item [showArrow]='false' *ngFor='let rule of rules.controls; let i = index' [formGroupName]='i'>
+  <tui-accordion formArrayName="rules">
+    <tui-accordion-item [showArrow]="false" *ngFor="let rule of rules.controls; let i = index" [formGroupName]="i">
       <tui-badge
-        status='info'
-        class='tui-space_right-1'
-        *ngFor='let pattern of rule.value.patterns'
-        [value]='pattern'
+        status="info"
+        class="tui-space_right-1"
+        *ngFor="let pattern of rule.value.patterns"
+        [value]="pattern"
       ></tui-badge>
       <tui-badge
-        status='success'
-        class='tui-space_right-1'
-        *ngIf='rule.value.selector'
-        [value]='rule.value.selector'
+        status="success"
+        class="tui-space_right-1"
+        *ngFor="let selector of rule.value.selector"
+        [value]="selector"
       ></tui-badge>
       <tui-badge
-        status='neutral'
-        class='tui-space_right-1'
-        *ngFor='let unwanted of rule.value.unwanted'
-        [value]='unwanted'
+        status="neutral"
+        class="tui-space_right-1"
+        *ngFor="let ignored of rule.value.ignored"
+        [value]="ignored"
       ></tui-badge>
       <ng-template tuiAccordionItemContent>
-        <h5 class='tui-text_h5 tui-space_bottom-4 tui-space_top-4'>{{ 'optionRulePatterns' | i18n }}</h5>
-        <div formArrayName='patterns'>
-          <div class='inputs'>
+        <h6 class="tui-text_h6 tui-space_bottom-4 tui-space_top-4">{{ 'optionRulePatterns' | i18n }}</h6>
+        <div formArrayName="patterns">
+          <div class="inputs">
             <tui-input
-              [tuiTextfieldLabelOutside]='true'
-              tuiTextfieldSize='m'
-              *ngFor='let pattern of patterns(rule).controls; let i = index'
-              [formControlName]='i'
+              [tuiTextfieldLabelOutside]="true"
+              tuiTextfieldSize="m"
+              *ngFor="let pattern of patternsForm(rule).controls; let i = index"
+              [formControlName]="i"
             ></tui-input>
           </div>
-          <button tuiButton size='s' class='tui-space_top-1' icon='tuiIconPlus' (click)='addPattern(patterns(rule))'>
+          <button tuiButton size="s" class="tui-space_top-1" icon="tuiIconPlus" (click)="addPatternControl(patternsForm(rule))">
             {{ 'optionRuleAddPattern' | i18n }}
           </button>
         </div>
-        <tui-input
-          class='tui-space_bottom-4 tui-space_top-4'
-          formControlName='selector'
-          tuiHintContent="{{ 'optionRuleSelectorDescription' | i18n }}"
-        >{{ 'optionRuleSelector' | i18n }}</tui-input
-        >
-        <h5 class='tui-text_h5 tui-space_bottom-4 tui-space_top-4'>
-          {{ 'optionRuleIgnored' | i18n }}
-          <tui-tooltip content="{{ 'optionRuleIgnoredDescription' | i18n }}" direction='right'></tui-tooltip>
-        </h5>
+        <h6 class="tui-text_h6 tui-space_bottom-4 tui-space_top-4">
+          {{ 'optionRuleSelector' | i18n }}
+          <tui-tooltip content="{{ 'optionRuleSelectorDescription' | i18n }}" direction="right"></tui-tooltip>
+        </h6>
 
-        <div formArrayName='unwanted'>
-          <div class='inputs'>
+        <div formArrayName="selector">
+          <div class="inputs">
             <tui-input
-              [tuiTextfieldLabelOutside]='true'
-              tuiTextfieldSize='m'
-              [formControlName]='i'
-              *ngFor='let unwanted of unwanted(rule).controls; let i = index'
+              [tuiTextfieldLabelOutside]="true"
+              tuiTextfieldSize="m"
+              [formControlName]="i"
+              *ngFor="let selector of selectorForm(rule).controls; let i = index"
             ></tui-input>
           </div>
-          <button tuiButton size='s' class='tui-space_top-1' icon='tuiIconPlus' (click)='addUnwanted(unwanted(rule))'>
+          <button tuiButton size="s" class="tui-space_top-1" icon="tuiIconPlus" (click)="addSelectorControl(selectorForm(rule))">
+            {{ 'optionRuleAddSelector' | i18n }}
+          </button>
+        </div>
+        <h6 class="tui-text_h6 tui-space_bottom-4 tui-space_top-4">
+          {{ 'optionRuleIgnored' | i18n }}
+          <tui-tooltip content="{{ 'optionRuleIgnoredDescription' | i18n }}" direction="right"></tui-tooltip>
+        </h6>
+
+        <div formArrayName="ignored">
+          <div class="inputs">
+            <tui-input
+              [tuiTextfieldLabelOutside]="true"
+              tuiTextfieldSize="m"
+              [formControlName]="i"
+              *ngFor="let ignored of ignoredForm(rule).controls; let i = index"
+            ></tui-input>
+          </div>
+          <button tuiButton size="s" class="tui-space_top-1" icon="tuiIconPlus" (click)="addIgnoredControl(ignoredForm(rule))">
             {{ 'optionRuleAddIgnored' | i18n }}
           </button>
         </div>
-        <tui-text-area class='tui-space_top-4' formControlName='template'>
-          {{'optionRuleTemplate' | i18n}}
+        <tui-text-area class="tui-space_top-4" formControlName="template">
+          {{ 'optionRuleTemplate' | i18n }}
         </tui-text-area>
       </ng-template>
     </tui-accordion-item>
