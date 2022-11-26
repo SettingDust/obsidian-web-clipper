@@ -3171,6 +3171,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/mustache@npm:^4":
+  version: 4.2.2
+  resolution: "@types/mustache@npm:4.2.2"
+  checksum: f0c28dddc8589e43d224df0a6879b621f6f461420c52e314012a0501ea30c823b0a89a35fc4b1d5539a0ab25bbcf840a2ef8792b0d0563f949c80f61a355e580
+  languageName: node
+  linkType: hard
+
 "@types/node@npm:*":
   version: 17.0.17
   resolution: "@types/node@npm:17.0.17"
@@ -10073,13 +10080,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"micromustache@npm:^8.0.3":
-  version: 8.0.3
-  resolution: "micromustache@npm:8.0.3"
-  checksum: 3248d7951f0b2e0debdc0a5f9bad073c43b8863fcd0ac28d792c8bc425fdcca80e8e7b178e2aaca1bc797ff617419323a631ae245b49822126d1d352db50734b
-  languageName: node
-  linkType: hard
-
 "mime-db@npm:1.51.0, mime-db@npm:>= 1.43.0 < 2":
   version: 1.51.0
   resolution: "mime-db@npm:1.51.0"
@@ -10410,6 +10410,15 @@ __metadata:
     array-union: ^3.0.1
     minimatch: ^3.0.4
   checksum: e303c3d83a66bdffbe6bb50b7be000dd299f1928a602323adc92daef3c1028ef1ee4cabf7d2ac458e32096c5dac2a263209835464348faf8a8332d076b58c35a
+  languageName: node
+  linkType: hard
+
+"mustache@npm:^4.2.0":
+  version: 4.2.0
+  resolution: "mustache@npm:4.2.0"
+  bin:
+    mustache: bin/mustache
+  checksum: 1f8197e8a19e63645a786581d58c41df7853da26702dbc005193e2437c98ca49b255345c173d50c08fe4b4dbb363e53cb655ecc570791f8deb09887248dd34a2
   languageName: node
   linkType: hard
 
@@ -11120,6 +11129,7 @@ __metadata:
     "@tinkoff/ng-dompurify": ^4.0.0
     "@types/dompurify": ^2.4.0
     "@types/firefox-webext-browser": ^94.0.1
+    "@types/mustache": ^4
     "@types/node": ~16
     "@types/sanitize-html": ^2.6.2
     "@webcomponents/custom-elements": ^1.5.1
@@ -11133,7 +11143,7 @@ __metadata:
     eslint-plugin-prettier: ^4.2.1
     eslint-plugin-unicorn: ^45.0.0
     filenamify: ^5.1.1
-    micromustache: ^8.0.3
+    mustache: ^4.2.0
     ngx-build-plus: ^15.0.0
     node-html-markdown: ^1.2.2
     npm-run-all: ^4.1.5

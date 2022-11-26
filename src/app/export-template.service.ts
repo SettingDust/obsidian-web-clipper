@@ -4,8 +4,8 @@ import { filter, map } from 'rxjs/operators'
 import { RuleService } from './rule.service'
 import { Observable } from 'rxjs'
 import defaultTemplate from '../assets/default.template'
-import { render } from 'micromustache'
 import 'urlpattern-polyfill'
+import render from 'mustache'
 
 @Injectable({
   providedIn: 'root'
@@ -30,5 +30,20 @@ export class ExportTemplateService {
   get = (url: string) =>
     this.ruleService.first(url).pipe(map((it) => it?.template ?? this.defaultTemplate)) as Observable<string>
 
-  render = (template: string, data: { title: string; url: string; content: string }) => render(template, data)
+  render = (
+    template: string,
+    data: {
+      title: string
+      url: string
+      content: string
+      author?: {
+        name?: string
+        url?: string
+      }
+      date?: {
+        published?: Date
+        modified?: Date
+      }
+    }
+  ) => render.render(template, data)
 }

@@ -59,19 +59,21 @@ export class BackgroundComponent {
         tap((it) => console.debug('[action:export]: ', it.message)),
         switchMap(({ message: { document, url: rawUrl, selection, path = '' }, sender }) =>
           articleParserService.extract({ document, url: rawUrl, selection }).pipe(
-            tap(it => console.debug('[article-extractor]: ', it)),
-            map(({ title, content, url }) => ({
+            tap((it) => console.debug('[article-extractor]: ', it)),
+            map(({ title, content, url, author, date }) => ({
               title: title ?? '',
               content: markdownService.convert(selection ?? content ?? ''),
               path,
-              url: url ?? rawUrl
+              url: url ?? rawUrl,
+              author,
+              date
             })),
-            switchMap(({ title, content, path, url }) =>
+            switchMap(({ title, content, path, url, author, date }) =>
               templateService.get(url).pipe(
                 map((template) => ({
                   title,
                   path,
-                  content: templateService.render(template, { title, url, content })
+                  content: templateService.render(template, { title, url, content, author, date })
                 }))
               )
             ),
