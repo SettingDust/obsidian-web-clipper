@@ -5,7 +5,6 @@
   "version": "0.3.4",
   "scripts": {
     "ng": "ng",
-    "format": "prettier --write .",
     "lint": "cd ./dist && web-ext lint",
     "lint:dev": "npm-run-all build:dev lint",
     "build": "npm-run-all build:angular build:content lint",
@@ -56,6 +55,11 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^15.0.0",
+    "@angular-eslint/builder": "15.1.0",
+    "@angular-eslint/eslint-plugin": "15.1.0",
+    "@angular-eslint/eslint-plugin-template": "15.1.0",
+    "@angular-eslint/schematics": "15.1.0",
+    "@angular-eslint/template-parser": "15.1.0",
     "@angular/cli": "^15.0.0",
     "@angular/compiler-cli": "^15.0.1",
     "@types/dompurify": "^2.4.0",
@@ -63,6 +67,8 @@
     "@types/mustache": "^4",
     "@types/node": "~16",
     "@types/sanitize-html": "^2.6.2",
+    "@typescript-eslint/eslint-plugin": "5.44.0",
+    "@typescript-eslint/parser": "5.44.0",
     "esbuild": "^0.15.15",
     "eslint": "^8.28.0",
     "eslint-config-prettier": "^8.5.0",
