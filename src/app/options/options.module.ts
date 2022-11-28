@@ -7,8 +7,10 @@ import { ReactiveFormsModule } from '@angular/forms'
 import {
   TuiButtonModule,
   TuiDataListModule,
+  TuiGroupModule,
   TuiHintModule,
   TuiLinkModule,
+  TuiNotificationModule,
   TuiSvgModule,
   TuiTextfieldControllerModule
 } from '@taiga-ui/core'
@@ -35,7 +37,9 @@ import { SharedModule } from '../shared.module'
     TuiDataListWrapperModule,
     TuiDataListModule,
     TuiSelectModule,
-    SharedModule
+    SharedModule,
+    TuiGroupModule,
+    TuiNotificationModule
   ]
 })
 export class OptionsModule {}

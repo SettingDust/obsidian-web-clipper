@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core'
-import { FormBuilder } from '@angular/forms'
-import { from } from 'rxjs'
+import { FormBuilder, Validators } from '@angular/forms'
+import { EMPTY } from 'rxjs'
 import { switchMap, tap } from 'rxjs/operators'
+import { OptionService } from '../../option.service'
+import { i18n } from '../../i18n.pipe'
 
 @Component({
   selector: 'app-general',
@@ -10,17 +12,46 @@ import { switchMap, tap } from 'rxjs/operators'
 })
 export class GeneralComponent implements OnInit {
   form = this.fb.group({
-    vault: this.fb.control('')
+    url: this.fb.control('', Validators.required),
+    token: this.fb.control('', Validators.required)
   })
 
-  constructor(private fb: FormBuilder) {}
-
-  ngOnInit(): void {
-    from(browser.storage.local.get())
+  constructor(private fb: FormBuilder, private optionService: OptionService) {
+    this.optionService
+      .get('api')
       .pipe(
         tap((it) => this.form.patchValue(it)),
-        switchMap(() => this.form.valueChanges.pipe(switchMap((value) => browser.storage.local.set(value))))
+        switchMap(() =>
+          this.form.valueChanges.pipe(
+            switchMap((value) =>
+              value.url && value.token
+                ? this.optionService.set({
+                    api: {
+                      url: value.url,
+                      token: value.token
+                    }
+                  })
+                : EMPTY
+            )
+          )
+        )
       )
       .subscribe()
+  }
+
+  ngOnInit(): void {}
+
+  request() {
+    if (this.form.get('url')?.value) {
+      // Remove all origins permission
+      browser.permissions.getAll().then((it) => browser.permissions.remove({ origins: it.origins }))
+      browser.permissions
+        .request({
+          origins: [`${this.form.get('url')?.value}*`]
+        })
+        .then((it) => {
+          if (!it) throw new Error(i18n('errorNoPermission'))
+        })
+    }
   }
 }

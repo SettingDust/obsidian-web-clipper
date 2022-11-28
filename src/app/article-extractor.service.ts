@@ -26,10 +26,6 @@ export class ArticleExtractorService {
           defaultIfEmpty(undefined)
         )
       ),
-      tap((it) => {
-        console.debug('[article-extractor:raw:extractor]', it[0])
-        console.debug('[article-extractor:raw:selection]', it[1])
-      }),
       tap(([result, selection]) => (result.content = selection?.documentElement?.outerHTML ?? result?.content)),
       map(([result]) => result)
     )

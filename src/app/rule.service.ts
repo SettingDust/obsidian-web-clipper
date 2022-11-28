@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { filter, first, from, Observable, switchMap } from 'rxjs'
+import { filter, from, switchMap, take } from 'rxjs'
 import { ArticleExtractorService } from './article-extractor.service'
 import { OptionService } from './option.service'
 
@@ -17,7 +17,7 @@ export class RuleService {
    * All rule that success with url
    * @param url
    */
-  get = (url: string): Observable<Rule> =>
+  get = (url: string) =>
     this.optionService
       .get('rules')
       .pipe(
@@ -26,7 +26,7 @@ export class RuleService {
         )
       )
 
-  first = (url: string): Observable<Rule> => this.get(url).pipe(first())
+  first = (url: string) => this.get(url).pipe(take(1))
 }
 
 export interface Rule {

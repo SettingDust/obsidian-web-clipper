@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
 import { Title } from '@angular/platform-browser'
-import { I18nPipe } from './i18n.pipe'
+import { i18n } from './i18n.pipe'
 
 @Component({
   selector: 'app-root',
@@ -8,7 +8,7 @@ import { I18nPipe } from './i18n.pipe'
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
-  constructor(title: Title, i18n: I18nPipe) {
-    title.setTitle(i18n.transform('extensionName'))
+  constructor(title: Title) {
+    title.setTitle(i18n('extensionName'))
   }
 }

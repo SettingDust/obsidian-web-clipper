@@ -14,6 +14,7 @@ import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { I18nPipe } from './i18n.pipe'
+import { HttpClientModule } from '@angular/common/http'
 
 if (!('URLPattern' in globalThis)) {
   await import('urlpattern-polyfill')
@@ -23,6 +24,7 @@ if (!('URLPattern' in globalThis)) {
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     TuiRootModule,

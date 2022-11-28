@@ -14,11 +14,26 @@
   "optionTabRules": {
     "message": "规则"
   },
-  "optionVault": {
-    "message": "库"
+  "optionGeneralApi": {
+    "message": "Local REST API 设置"
   },
-  "optionVaultDescription": {
-    "message": "可选，如果留空就是当前或最后使用的库"
+  "optionApiUrl": {
+    "message": "端点"
+  },
+  "optionApiUrlDescription": {
+    "message": "Local REST API 端点。域名应该是你的 IP，通常是 `localhost`。冒号后的端口可以在 Obsidian > Local REST API 的设置中找到"
+  },
+  "optionApiUrlPermission": {
+    "message": "请求权限"
+  },
+  "optionApiUrlPermissionDescription": {
+    "message": "修改端点后必须请求一次权限"
+  },
+  "optionApiToken": {
+    "message": "令牌"
+  },
+  "optionApiTokenDescription": {
+    "message": "Local REST API 令牌，可以在 Obsidian > Local REST API > Token 的设置中找到"
   },
   "optionShortcut": {
     "message": "快捷键"
@@ -80,5 +95,14 @@
   },
   "optionRuleTemplate": {
     "message": "模板"
+  },
+  "errorNoServer": {
+    "message": "无法连接服务器，请确认 Obsidian 已启动，且装有 Local REST API 插件，并检查 URL 设置"
+  },
+  "errorNoPermission": {
+    "message": "无法获取扩展域名访问权限"
+  },
+  "errorNoToken": {
+    "message": "令牌缺失或错误"
   }
 }

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { i18n } from './i18n.pipe'
 import { from, Observable, Subject, switchMap } from 'rxjs'
 import { ExtensionService } from './extension.service'
-import { tap } from 'rxjs/operators'
+import { map, tap } from 'rxjs/operators'
 import { Rule } from './rule.service'
 import StorageChange = browser.storage.StorageChange
 
@@ -39,8 +39,6 @@ const defaultOptions = {
 export type Options = typeof defaultOptions
 type OptionKeys = keyof Options
 
-type IndexValue<T, K extends PropertyKey> = T extends unknown ? (K extends keyof T ? T[K] : never) : never
-
 @Injectable({
   providedIn: 'root'
 })
@@ -59,8 +57,14 @@ export class OptionService {
       .subscribe((it) => browser.storage.local.set(it).then())
   }
 
+  set<T extends OptionKeys>(value: {
+    [key in T]: Options[key]
+  }) {
+    return from(browser.storage.local.set(value))
+  }
+
   get<T extends OptionKeys>(key: T) {
-    return from(<Promise<IndexValue<Options, T>>>browser.storage.local.get(key))
+    return from(<Promise<Pick<Options, T>>>browser.storage.local.get(key)).pipe(map((it) => it[key]))
   }
 
   private _onChange = new Subject<Partial<Options>>()

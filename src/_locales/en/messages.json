@@ -14,6 +14,27 @@
   "optionTabRules": {
     "message": "Rules"
   },
+  "optionGeneralApi": {
+    "message": "Local REST API options"
+  },
+  "optionApiUrl": {
+    "message": "Endpoint"
+  },
+  "optionApiUrlDescription": {
+    "message": "Local REST API Endpoint. Host is your ip or domain, be `localhost`commonly. Port after the colon can be found in Obsidian > Local REST API options"
+  },
+  "optionApiUrlPermission": {
+    "message": "Request permission"
+  },
+  "optionApiUrlPermissionDescription": {
+    "message": "Have to request permission after change the endpoint for access"
+  },
+  "optionApiToken": {
+    "message": "Token"
+  },
+  "optionApiTokenDescription": {
+    "message": "Local REST API token，can be found in Obsidian > Local REST API > Token options"
+  },
   "optionVault": {
     "message": "Vault"
   },
@@ -82,5 +103,14 @@
   },
   "optionRuleTemplate": {
     "message": "Template"
+  },
+  "errorNoServer": {
+    "message": "Can't connect to server. Please confirm Obsidian is running, installed Local REST API plugin in Obsidian and check url option"
+  },
+  "errorNoPermission": {
+    "message": "Can't get extension permission"
+  },
+  "errorNoToken": {
+    "message": "No or wrong token"
   }
 }

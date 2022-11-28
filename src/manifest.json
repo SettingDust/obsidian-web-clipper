@@ -4,15 +4,25 @@
   "name": "__MSG_extensionName__",
   "version": "0.3.4",
   "description": "__MSG_extensionDescription__",
-  "permissions": ["tabs", "storage"],
+  "permissions": [
+    "tabs",
+    "storage"
+  ],
+  "optional_permissions": [
+    "<all_urls>"
+  ],
   "background": {
     "page": "index.html?#/background",
     "persistent": true
   },
   "content_scripts": [
     {
-      "js": ["content-script.js"],
-      "matches": ["<all_urls>"]
+      "js": [
+        "content-script.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
     }
   ],
   "options_ui": {
