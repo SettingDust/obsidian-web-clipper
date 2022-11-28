@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { from } from 'rxjs'
-import { BrowserService } from '../../browser.service'
+import { ExtensionService } from '../../extension.service'
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms'
 import { ActivatedRoute } from '@angular/router'
 import { map, switchMap } from 'rxjs/operators'
@@ -27,7 +27,7 @@ export class RulesComponent implements OnInit {
   })
 
   constructor(
-    private browserService: BrowserService,
+    private extensionService: ExtensionService,
     private fb: FormBuilder,
     private templateService: ExportTemplateService,
     route: ActivatedRoute
@@ -35,19 +35,17 @@ export class RulesComponent implements OnInit {
     // TODO 符合 url 的规则排在上面
   }
 
-  get rules() {
-    return this.form.get('rules') as FormArray<FormGroup<RuleForm>>
-  }
+  rulesForm=() =>
+     this.form.get('rules') as FormArray<FormGroup<RuleForm>>
 
-  patternsForm(rule: AbstractControl) {
-    return rule.get('patterns') as FormArray<AbstractControl<string>>
-  }
+
+  patternsForm =(rule: AbstractControl) => rule.get('patterns') as FormArray<AbstractControl<string>>
 
   ignoredForm = (rule: AbstractControl) => rule.get('ignored') as FormArray<AbstractControl<string>>
   selectorForm = (rule: AbstractControl) => rule.get('selector') as FormArray<AbstractControl<string>>
 
   addRule(data: Rule = { patterns: [''], template: this.templateService.defaultTemplate }) {
-    this.rules.insert(0, this.ruleToForm(data))
+    this.rulesForm().insert(0, this.ruleToForm(data))
   }
 
   addPatternControl(patterns: FormArray) {

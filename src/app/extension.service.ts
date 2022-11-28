@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { filter, map } from 'rxjs/operators'
-import { from, mapTo, Observable } from 'rxjs'
+import { from, Observable } from 'rxjs'
 import { ActionData, ActionDataType, ActionMessage, Actions } from '../action'
 import { ExportData } from './article-extractor.service'
 import MessageSender = browser.runtime.MessageSender
@@ -8,26 +8,29 @@ import MessageSender = browser.runtime.MessageSender
 @Injectable({
   providedIn: 'root'
 })
-export class BrowserService {
+export class ExtensionService {
   private $listener = new Observable<ContentMessageListener<any>>((subscriber) =>
     browser.runtime.onMessage.addListener((message, sender, respond) => subscriber.next({ message, sender, respond }))
   )
 
   message = {
-    listener: <T extends ContentAction>() => this.$listener as Observable<ContentMessageListener<T>>,
-    actionListener: <T extends ContentAction>(action: T) =>
-      this.message.listener<T>().pipe(
+    onReceive: <T extends ContentAction>() => this.$listener as Observable<ContentMessageListener<T>>,
+    onAction: <T extends ContentAction>(action: T) =>
+      this.message.onReceive<T>().pipe(
         filter(({ message }) => message.action === action),
         map(
-          ({ message: { data }, sender, respond }) =>
+          ({ message, sender, respond }) =>
             ({
-              message: data,
+              message: message.data,
               sender,
               respond
             } as ContentMessageListener<T> & { message: ContentActionMessage<T, 'receive'>['data'] })
         )
       ),
-    action: <T extends ContentAction, U extends ContentActionMessage<T, 'send'>['data']>(
+    action: <
+      T extends ContentAction,
+      U extends ContentActionMessage<T, 'send'>['data'] = ContentActionMessage<T, 'send'>['data']
+    >(
       tab: number,
       action: T,
       data?: U
@@ -35,20 +38,19 @@ export class BrowserService {
   }
 
   tab = {
-    create: ({ url, active = false }: { url: string; active?: boolean }): Observable<browser.tabs.Tab> =>
-      from(browser.tabs.create({ url, active })),
-    warmup: (id: number) => from(browser.tabs.warmup(id)).pipe(mapTo(id))
+    create: (options: { url: string; active?: boolean }) => from(browser.tabs.create({ active: false, ...options })),
+    warmup: (id: number) => from(browser.tabs.warmup(id)).pipe(map(() => id))
   }
 
-  private change$ = new Observable<[changes: { [key: string]: browser.storage.StorageChange }, area: string]>(
+  private $change = new Observable<[changes: { [key: string]: browser.storage.StorageChange }, area: string]>(
     (subscriber) => browser.storage.onChanged.addListener((change, area) => subscriber.next([change, area]))
   )
 
   storage = {
-    change: (name: 'local' | 'sync' | 'managed'): Observable<{ [key: string]: browser.storage.StorageChange }> =>
-      this.change$.pipe(
-        filter(([, area]) => area === name),
-        map(([change]) => change)
+    onChange: <T extends Record<string, unknown>, U extends keyof T = keyof T>(name: 'local' | 'sync' | 'managed') =>
+      this.$change.pipe(
+        filter(([change, area]) => area === name),
+        map(([change]) => <Partial<{ [key in U]: browser.storage.StorageChange }>>change)
       )
   }
 }

@@ -1,5 +1,6 @@
 # {{title}}
 *[{{&url}}]({{&url}})*
-{{#author}}Author: [[{{^author.url}}{{&author.name}}{{/author.url}}{{#author.url}}[{{&author.name}}]({{&author.url}}){{/author.url}}]]{{/author}}
-{{#date}}{{#date.published}}Published: {{date.published}}{{/date.published}} {{#date.modified}}Modified: {{date.modified}}{{/date.modified}}{{/date}}
+{{#author}}Author: {{^author.url}}{{&author.name}}{{/author.url}}{{#author.url}}[{{&author.name}}]({{&author.url}}){{/author.url}}{{/author}}
+{{#date}}{{#date.published}}Published: {{date.published}}{{/date.published}} {{#date.modified}}
+Modified: {{date.modified}}{{/date.modified}}{{/date}}
 {{&content}}

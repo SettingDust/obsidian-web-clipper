@@ -4,7 +4,7 @@
     {{ 'optionRuleAdd' | i18n }}
   </button>
   <tui-accordion formArrayName="rules">
-    <tui-accordion-item [showArrow]="false" *ngFor="let rule of rules.controls; let i = index" [formGroupName]="i">
+    <tui-accordion-item [showArrow]="false" *ngFor="let rule of rulesForm().controls; let i = index" [formGroupName]="i">
       <tui-badge
         status="info"
         class="tui-space_right-1"

@@ -16,7 +16,7 @@
     }
   ],
   "options_ui": {
-    "page": "index.html?#/options/(options:general)",
+    "page": "index.html?#/(options:general)",
     "open_in_tab": true
   },
   "browser_specific_settings": {

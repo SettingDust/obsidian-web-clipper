@@ -15,6 +15,10 @@ import { AppComponent } from './app.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { I18nPipe } from './i18n.pipe'
 
+if (!('URLPattern' in globalThis)) {
+  await import('urlpattern-polyfill')
+}
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
