@@ -2951,9 +2951,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@settingdust/article-extractor@npm:^0.2.2":
-  version: 0.2.2
-  resolution: "@settingdust/article-extractor@npm:0.2.2"
+"@settingdust/article-extractor@npm:^0.2.4":
+  version: 0.2.4
+  resolution: "@settingdust/article-extractor@npm:0.2.4"
   dependencies:
     "@availity/resolve-url": ^2.0.3
     "@microsoft/recognizers-text-date-time": ^1.3.0
@@ -2977,7 +2977,7 @@ __metadata:
     schema-dts: ^1.1.0
     ts-deepmerge: ^5.0.0
     urlpattern-polyfill: ^6.0.2
-  checksum: 6d1bb37df620af97620cf155de09128fe38f6807aaec3269820e533ed27706d7578f3f73b45093145478a2d9837882cb0123612ccbe2a8a3b2c50c091f5a2432
+  checksum: eaca272cca1b943bc127733e7b8d900c4a8362183b996c582f6d8de2baa82cf49f555b4fc4a78b7a253271a1eddffc5dde45e76bcee7ca6a9227d2eb061e5328
   languageName: node
   linkType: hard
 
@@ -12075,7 +12075,7 @@ __metadata:
     "@angular/platform-browser-dynamic": ^15.0.1
     "@angular/router": ^15.0.1
     "@availity/resolve-url": ^2.0.3
-    "@settingdust/article-extractor": ^0.2.2
+    "@settingdust/article-extractor": ^0.2.4
     "@taiga-ui/addon-doc": ^3.10.0
     "@taiga-ui/addon-table": ^3.10.0
     "@taiga-ui/addon-tablebars": ^3.10.0
