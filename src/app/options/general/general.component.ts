@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component } from '@angular/core'
 import { FormBuilder, Validators } from '@angular/forms'
 import { EMPTY } from 'rxjs'
 import { switchMap, tap } from 'rxjs/operators'
@@ -10,7 +10,7 @@ import { i18n } from '../../i18n.pipe'
   templateUrl: './general.component.html',
   styleUrls: ['./general.component.scss']
 })
-export class GeneralComponent implements OnInit {
+export class GeneralComponent {
   form = this.fb.group({
     url: this.fb.control('', Validators.required),
     token: this.fb.control('', Validators.required)
@@ -38,8 +38,6 @@ export class GeneralComponent implements OnInit {
       )
       .subscribe()
   }
-
-  ngOnInit(): void {}
 
   request() {
     if (this.form.get('url')?.value) {

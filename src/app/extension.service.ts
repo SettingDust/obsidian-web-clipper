@@ -9,8 +9,9 @@ import MessageSender = browser.runtime.MessageSender
   providedIn: 'root'
 })
 export class ExtensionService {
-  private $listener = new Observable<ContentMessageListener<any>>((subscriber) =>
-    browser.runtime.onMessage.addListener((message, sender, respond) => subscriber.next({ message, sender, respond }))
+  // eslint-disable-next-line unicorn/consistent-function-scoping
+  private $listener = new Observable<unknown>(({ next }) =>
+    browser.runtime.onMessage.addListener((message, sender, respond) => next({ message, sender, respond }))
   )
 
   message = {
@@ -43,13 +44,14 @@ export class ExtensionService {
   }
 
   private $change = new Observable<[changes: { [key: string]: browser.storage.StorageChange }, area: string]>(
-    (subscriber) => browser.storage.onChanged.addListener((change, area) => subscriber.next([change, area]))
+    // eslint-disable-next-line unicorn/consistent-function-scoping
+    ({ next }) => browser.storage.onChanged.addListener((change, area) => next([change, area]))
   )
 
   storage = {
     onChange: <T extends Record<string, unknown>, U extends keyof T = keyof T>(name: 'local' | 'sync' | 'managed') =>
       this.$change.pipe(
-        filter(([change, area]) => area === name),
+        filter(([, area]) => area === name),
         map(([change]) => <Partial<{ [key in U]: browser.storage.StorageChange }>>change)
       )
   }

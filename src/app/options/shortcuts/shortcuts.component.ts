@@ -9,7 +9,6 @@ import { map, switchMap, tap } from 'rxjs/operators'
   styleUrls: ['./shortcuts.component.scss']
 })
 export class ShortcutsComponent {
-  required = ['hotkey']
   form = this.fb.group({
     shortcuts: this.fb.array([])
   })
@@ -18,7 +17,7 @@ export class ShortcutsComponent {
   constructor(private fb: UntypedFormBuilder) {
     from(browser.storage.local.get('shortcuts'))
       .pipe(
-        map((it) => it.shortcuts as [{ shortcut: string; action: string } & any]),
+        map((it) => it.shortcuts as [{ shortcut: string; action: string } & unknown]),
         tap((it) => this.form.setControl('shortcuts', this.fb.array(it.map((data) => this.fb.group(data))))),
         switchMap((it) =>
           from(it).pipe(
@@ -29,7 +28,7 @@ export class ShortcutsComponent {
         ),
         switchMap(() =>
           this.form.valueChanges.pipe(
-            map((it) => it.shortcuts.filter((obj: { shortcut: any }) => obj.shortcut)),
+            map((it) => it.shortcuts.filter((object: { shortcut: unknown }) => object.shortcut)),
             switchMap((value) => browser.storage.local.set({ shortcuts: value }))
           )
         )
@@ -41,16 +40,15 @@ export class ShortcutsComponent {
     return this.form.get('shortcuts') as UntypedFormArray
   }
 
-  addShortcut(data: { shortcut: string; action: string } & any = { shortcut: '', action: 'option' }) {
-    this.shortcuts.push(this.fb.group(this.shortcutToForm(data)))
+  addShortcut(data?: { shortcut: string; action: string } & unknown) {
+    this.shortcuts.push(this.fb.group(this.shortcutToForm({ shortcut: '', action: 'option', ...data })))
   }
 
-  shortcutToForm = (data: { shortcut: string; action: string } & any) =>
-    Object.entries(data).reduce((prev, [key, value]) => {
-      prev[key] = this.fb.control(value)
-      if (this.required.includes(key)) prev[key].setValidators(Validators.required)
-      return prev
-    }, {} as { [key: string]: AbstractControl })
+  shortcutToForm = (data: { shortcut: string; action: string } & unknown) =>
+    this.fb.group({
+      shortcut: [data.shortcut, Validators.required],
+      action: [data.action]
+    })
 
   $shortcutChange = (shortcut: AbstractControl) =>
     concat(of(shortcut.get('action')?.value), from(shortcut.get('action')?.valueChanges ?? ''))

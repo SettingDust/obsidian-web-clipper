@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { ExtensionService } from '../extension.service'
-import { filter, map, retry, switchMap } from 'rxjs/operators'
+import { filter, map, switchMap } from 'rxjs/operators'
 import { Options, OptionService } from '../option.service'
 import { catchError, merge, Observable, throwError } from 'rxjs'
 import { HttpClient } from '@angular/common/http'
@@ -25,8 +25,7 @@ export class ObsidianService {
    */
   status = () =>
     this.request<{ authenticated: boolean }>().pipe(
-      catchError((err) => this.open().pipe(() => throwError(() => err))),
-      retry(3)
+      catchError((error: unknown) => this.open().pipe(() => throwError(() => error)))
     )
 
   create = (filename: string, content?: string) =>
@@ -52,8 +51,8 @@ export class ObsidianService {
     Authorization: `Bearer ${this.api?.token}`
   })
 
-  private request = <Response = Object, Body = undefined>(
-    path: string = '',
+  private request = <Response = Record<string, unknown>, Body = undefined>(
+    path = '',
     method: 'get' | 'post' | 'put' | 'delete' | 'patch' = 'get',
     options: {
       body?: Body
@@ -61,7 +60,7 @@ export class ObsidianService {
         [header: string]: string | string[]
       }
     } = {}
-  ) => <Observable<Response>>this.httpClient.request(method, `${this.api!.url}${path}`, {
+  ) => <Observable<Response>>this.httpClient.request(method, `${this.api?.url}${path}`, {
       ...options,
       headers: {
         ...this.header(),

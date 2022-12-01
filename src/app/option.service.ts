@@ -4,7 +4,6 @@ import { from, Observable, Subject, switchMap } from 'rxjs'
 import { ExtensionService } from './extension.service'
 import { map, tap } from 'rxjs/operators'
 import { Rule } from './rule.service'
-import StorageChange = browser.storage.StorageChange
 
 const defaultOptions = {
   shortcuts: [
@@ -84,11 +83,16 @@ export class OptionService {
     browserService.storage
       .onChange<Options>('local')
       .pipe(
-        switchMap((changes) =>
-          from(<[keyof Options, StorageChange][]>Object.entries(changes)).pipe(
-            switchMap((change) => this.options.pipe(tap((it) => (it[change[0]] = change[1].newValue))))
-          )
-        )
+        tap((changes) => {
+          const result = <Options>{}
+          for (const key in changes) {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            result[key] = changes[key]?.newValue
+          }
+          this._onChange.next(result)
+        }),
+        switchMap(() => this.options.pipe(tap((it) => console.debug('[options:change]', it))))
       )
       .subscribe()
   }

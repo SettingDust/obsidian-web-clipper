@@ -25,18 +25,16 @@ export class BackgroundComponent {
     extensionService.message
       .onAction('export')
       .pipe(
-        tap((it) => console.debug('[action:export]: ', it.message)),
+        tap((it) => console.debug('[action:export]:', it.message)),
         switchMap(({ message: { document, url: inputUrl, selection, path = '' }, sender }) =>
           obsidianService.status().pipe(
             catchError(() => throwError(() => new Error(i18n('errorNoServer')))),
             switchMap((it) => {
-              if (it.authenticated) {
-                return of(true)
-              } else return throwError(() => new Error(i18n('errorNoToken')))
+              return it.authenticated ? of(true) : throwError(() => new Error(i18n('errorNoToken')))
             }),
             switchMap(() =>
               articleParserService.extract({ document, url: inputUrl, selection }).pipe(
-                tap((it) => console.debug('[article-extractor]: ', it)),
+                tap((it) => console.debug('[article-extractor]:', it)),
                 map((data) => (data.content ? { ...data, content: markdownService.convert(data.content) } : data)),
                 switchMap((data) =>
                   templateService.get(data.url).pipe(
@@ -52,9 +50,9 @@ export class BackgroundComponent {
                 )
               )
             ),
-            catchError((err) => {
-              extensionService.message.action(sender.tab!.id!, 'error', err)
-              return throwError(() => err)
+            catchError((error: unknown) => {
+              if (sender?.tab?.id) extensionService.message.action(sender.tab.id, 'error', error)
+              return throwError(() => error)
             })
           )
         )
