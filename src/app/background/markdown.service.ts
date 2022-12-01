@@ -5,5 +5,12 @@ import { NodeHtmlMarkdown } from 'node-html-markdown'
   providedIn: 'root'
 })
 export class MarkdownService {
-  convert = (html: string) => NodeHtmlMarkdown.translate(html)
+  convert = (html: string) => {
+    const content = NodeHtmlMarkdown.translate(html, {
+      preferNativeParser: true,
+      textReplace: [[/</g, '\\<']]
+    })
+    console.debug('[markdown]:', content)
+    return content
+  }
 }

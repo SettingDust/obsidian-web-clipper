@@ -1,9 +1,9 @@
 import { ActionData } from '../action'
 import $background from './background-listener'
 
-$background.message.actionListener('error').subscribe(({ message, sender, respond }) => {
+$background.message.actionListener('error').subscribe(({ message, respond }) => {
   // TODO: popup of error
-  console.warn(message)
+  console.warn('[obsidian-web-clipper:error]', message)
   respond()
 })
 

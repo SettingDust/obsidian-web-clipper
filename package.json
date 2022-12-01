@@ -2,7 +2,7 @@
   "name": "obsidian-web-clipper",
   "packageManager": "yarn@3.3.0",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "scripts": {
     "ng": "ng",
     "lint": "cd ./dist && web-ext lint",

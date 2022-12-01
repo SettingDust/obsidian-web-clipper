@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core'
 import { filter, from, switchMap, take } from 'rxjs'
 import { ArticleExtractorService } from './article-extractor.service'
 import { OptionService } from './option.service'
+import { tap } from 'rxjs/operators'
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,11 @@ export class RuleService {
         )
       )
 
-  first = (url: string) => this.get(url).pipe(take(1))
+  first = (url: string) =>
+    this.get(url).pipe(
+      take(1),
+      tap((it) => console.debug('[rule]', it))
+    )
 }
 
 export interface Rule {

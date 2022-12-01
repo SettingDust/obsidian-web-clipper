@@ -28,7 +28,10 @@ export class ArticleExtractorService {
         )
       ),
       tap(([result, selection]) => (result.content = selection?.documentElement?.outerHTML ?? result?.content)),
-      map(([result]) => result)
+      map(([result]) => {
+        console.debug('[article-extractor]:', result)
+        return result
+      })
     )
 
   private absolutifyDocument = (document: Document, baseUrl = document.baseURI) => {

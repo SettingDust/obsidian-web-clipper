@@ -1,2 +1,4 @@
 import './background-listener'
-import './hotkeys'
+import './shortcuts'
+
+console.debug('[obsidian-web-clipper]: Loaded')

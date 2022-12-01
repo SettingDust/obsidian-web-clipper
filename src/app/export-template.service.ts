@@ -5,7 +5,8 @@ import render from 'mustache'
 import { ArticleExtractorService } from './article-extractor.service'
 // eslint-disable-next-line rxjs/no-internal
 import type { ObservedValueOf } from 'rxjs/internal/types'
-import { map } from 'rxjs/operators'
+import { map, tap } from 'rxjs/operators'
+import { defaultIfEmpty } from 'rxjs'
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,12 @@ export class ExportTemplateService {
     return defaultTemplate
   }
 
-  get = (url: string) => this.ruleService.first(url).pipe(map((it) => it.template ?? this.defaultTemplate))
+  get = (url: string) =>
+    this.ruleService.first(url).pipe(
+      map((it) => it.template ?? this.defaultTemplate),
+      defaultIfEmpty(this.defaultTemplate),
+      tap((it) => console.debug('[template]', it))
+    )
 
   render = (template: string, data: ObservedValueOf<ReturnType<ArticleExtractorService['extract']>>) =>
     render.render(template, data)

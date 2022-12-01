@@ -10,8 +10,8 @@ import MessageSender = browser.runtime.MessageSender
 })
 export class ExtensionService {
   // eslint-disable-next-line unicorn/consistent-function-scoping
-  private $listener = new Observable<unknown>(({ next }) =>
-    browser.runtime.onMessage.addListener((message, sender, respond) => next({ message, sender, respond }))
+  private $listener = new Observable<unknown>((subscriber) =>
+    browser.runtime.onMessage.addListener((message, sender, respond) => subscriber.next({ message, sender, respond }))
   )
 
   message = {
@@ -45,7 +45,7 @@ export class ExtensionService {
 
   private $change = new Observable<[changes: { [key: string]: browser.storage.StorageChange }, area: string]>(
     // eslint-disable-next-line unicorn/consistent-function-scoping
-    ({ next }) => browser.storage.onChanged.addListener((change, area) => next([change, area]))
+    (subscriber) => browser.storage.onChanged.addListener((change, area) => subscriber.next([change, area]))
   )
 
   storage = {

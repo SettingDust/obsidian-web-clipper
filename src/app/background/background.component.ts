@@ -34,7 +34,6 @@ export class BackgroundComponent {
             }),
             switchMap(() =>
               articleParserService.extract({ document, url: inputUrl, selection }).pipe(
-                tap((it) => console.debug('[article-extractor]:', it)),
                 map((data) => (data.content ? { ...data, content: markdownService.convert(data.content) } : data)),
                 switchMap((data) =>
                   templateService.get(data.url).pipe(
@@ -59,11 +58,13 @@ export class BackgroundComponent {
       )
       .subscribe()
 
-    extensionService.message.onAction('option').subscribe(() =>
-      browser.tabs.create({
+    extensionService.message.onAction('option').subscribe((data) => {
+      console.debug('[action:option]')
+      data.respond()
+      return browser.tabs.create({
         url: browser.runtime.getURL('index.html?#/(options:rules)'),
         active: true
       })
-    )
+    })
   }
 }
