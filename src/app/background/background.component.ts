@@ -51,7 +51,8 @@ export class BackgroundComponent {
             ),
             catchError((error: unknown) => {
               if (sender?.tab?.id) extensionService.message.action(sender.tab.id, 'error', error)
-              return throwError(() => error)
+              console.warn(error)
+              return of(null)
             })
           )
         )

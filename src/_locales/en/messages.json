@@ -108,9 +108,9 @@
     "message": "Can't connect to server. Please confirm Obsidian is running, installed Local REST API plugin in Obsidian and check url option"
   },
   "errorNoPermission": {
-    "message": "Can't get extension permission"
+    "message": "Can't get extension permission. Please click request permission in options page"
   },
   "errorNoToken": {
-    "message": "No or wrong token"
+    "message": "No or wrong Local REST API token. Please find it in Obsidian settings"
   }
 }
