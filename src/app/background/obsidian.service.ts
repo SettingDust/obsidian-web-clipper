@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { ExtensionService } from '../extension.service'
-import { filter, map, switchMap } from 'rxjs/operators'
+import { filter, map, switchMap, tap } from 'rxjs/operators'
 import { Options, OptionService } from '../option.service'
 import { catchError, merge, Observable, throwError } from 'rxjs'
 import { HttpClient } from '@angular/common/http'
@@ -17,24 +17,31 @@ export class ObsidianService {
     private options: OptionService,
     private httpClient: HttpClient
   ) {
-    merge(options.get('api'), options.onChange.pipe(map((it) => it.api))).subscribe((it) => (this.api = it))
+    merge(options.get('api'), options.onChange.pipe(map((it) => it.api))).subscribe((it) => {
+      this.api = it
+      console.debug(it)
+    })
   }
 
   /**
    * Fetch the REST server status
    */
-  status = () =>
-    this.request<{ authenticated: boolean }>().pipe(
+  status = () => {
+    console.debug('[connecting]', this.api)
+    return this.request<{ authenticated: boolean }>().pipe(
       catchError((error: unknown) => this.open().pipe(() => throwError(() => error)))
     )
+  }
 
-  create = (filename: string, content?: string) =>
-    this.request(`vault/${filename}`, 'put', {
+  create = (filename: string, content?: string) => {
+    console.debug('[obsidian:create:encoded]', filename)
+    return this.request(`vault/${filename}`, 'put', {
       headers: {
         'Content-Type': 'text/markdown'
       },
       body: content
     })
+  }
 
   /**
    * Open the Obsidian using url scheme

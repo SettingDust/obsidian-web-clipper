@@ -10,9 +10,10 @@ import { relativeToAbsolute } from '@availity/resolve-url'
 })
 export class ArticleExtractorService {
   rules = (rules: Rule[]) => {
+    contentSelectors.clear()
     for (const rule of rules) {
       for (const pattern of rule.patterns)
-        if (rule.selector) contentSelectors.set(new URLPattern(pattern), <Rule & { selector: string[] }>rule)
+        if (rule.selector) contentSelectors.set(pattern, <Rule & { selector: string[] }>rule)
     }
     console.debug('[article-extractor:content-selectors]', contentSelectors)
   }

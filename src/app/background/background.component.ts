@@ -38,8 +38,8 @@ export class BackgroundComponent {
                 switchMap((data) =>
                   templateService.get(data.url).pipe(
                     switchMap((template) => {
-                      const finalPath = `${path}/${filenamify(data.title)}.md`
-                      console.debug('[obsidian:create:path]', finalPath)
+                      const finalPath = `${encodeURIComponent(path)}/${encodeURIComponent(filenamify(data.title))}.md`
+                      console.debug('[obsidian:create]', finalPath)
                       return obsidianService.create(
                         finalPath,
                         data.content ? templateService.render(template, data) : undefined
